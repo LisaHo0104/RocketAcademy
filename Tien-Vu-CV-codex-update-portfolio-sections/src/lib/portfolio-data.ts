@@ -59,6 +59,12 @@ export type CareerJourneyProject = {
     src: string;
     title: string;
   };
+  videoGallery?: {
+    alt: string;
+    poster: string;
+    src: string;
+    title: string;
+  }[];
 };
 
 type AcademicBaseEntry = {
@@ -197,7 +203,7 @@ export const academicProjects = [
   },
 ] satisfies AcademicProject[];
 
-export const careerJourneyProjects = [
+export const careerJourneyProjects: CareerJourneyProject[] = [
   {
     title: "Education Network Group Pty Ltd",
     href: "https://www.educationnetworkgroup.com/",
@@ -335,29 +341,6 @@ export const careerJourneyProjects = [
         className: "career-layout-card-tall",
       },
       {
-        id: 4,
-        eyebrow: "Team moment",
-        title: "On-site Connection",
-        description:
-          "A personal memory from the field that reminds me why communication work matters most when it brings people closer together.",
-        details: "Buon Drang Phok, Dak Lak",
-        thumbnail: "/assets/portfolio/hope-tet-am-team.png",
-        alt: "Three Hope Volunteer Club members standing in front of a Tet Am backdrop",
-        className: "career-layout-card-square",
-      },
-      {
-        id: 5,
-        eyebrow: "Campaign launch",
-        title: "Manh Ghep Tuoi Tho",
-        description:
-          "A Mid-Autumn campaign launch that used warm illustration and child-centered storytelling to invite community participation.",
-        details: "Tet Trung Thu 2024",
-        metric: "96 reactions · 54 comments",
-        thumbnail: "/assets/portfolio/hope-mid-autumn-project.png",
-        alt: "Hope Volunteer Club Mid-Autumn 2024 campaign announcement",
-        className: "career-layout-card-wide",
-      },
-      {
         id: 6,
         eyebrow: "Early campaign",
         title: "Hoi Cho Don Trang",
@@ -370,6 +353,31 @@ export const careerJourneyProjects = [
         className: "career-layout-card-square",
       },
       {
+        id: 5,
+        eyebrow: "Campaign launch",
+        title: "Manh Ghep Tuoi Tho",
+        description:
+          "A Mid-Autumn campaign launch that used warm illustration and child-centered storytelling to invite community participation.",
+        details: "Tet Trung Thu 2024",
+        metric: "96 reactions · 54 comments",
+        thumbnail: "/assets/portfolio/hope-mid-autumn-project.png",
+        videoSrc: "/assets/portfolio/hope-mid-autumn-project-video.mp4",
+        alt: "Hope Volunteer Club Mid-Autumn 2024 campaign announcement",
+        className: "career-layout-card-wide",
+      },
+      {
+        id: 4,
+        eyebrow: "Team moment",
+        title: "On-site Connection",
+        description:
+          "A personal memory from the field that reminds me why communication work matters most when it brings people closer together.",
+        details: "Buon Drang Phok, Dak Lak",
+        thumbnail: "/assets/portfolio/hope-tet-am-team.png",
+        videoSrc: "/assets/portfolio/hope-tet-am-team-video.mp4",
+        alt: "Three Hope Volunteer Club members standing in front of a Tet Am backdrop",
+        className: "career-layout-card-square",
+      },
+      {
         id: 7,
         eyebrow: "Volunteer recruitment",
         title: "Final Puzzle Piece",
@@ -377,6 +385,7 @@ export const careerJourneyProjects = [
           "Recruitment content inviting volunteers to complete the campaign team and help create a full Mid-Autumn night for children.",
         details: "Manh Ghep Tuoi Tho",
         thumbnail: "/assets/portfolio/hope-mid-autumn-recruitment.png",
+        videoSrc: "/assets/portfolio/hope-mid-autumn-recruitment-video.mp4",
         alt: "Hope Volunteer Club volunteer recruitment post with puzzle visual",
         className: "career-layout-card-tall",
       },
@@ -404,50 +413,6 @@ export const careerJourneyProjects = [
     summary: [
       "Swinburne Vietnam was where I developed my hands-on experience in video production and editing. From interviewing students and presenting on camera to filming events and editing social content, I worked across the full creative process from idea to final video. Using Adobe Premiere Pro and CapCut, I learned how shot selection, pacing, audio, captions, and visual rhythm can turn everyday moments into engaging stories that feel authentic to the audience.",
     ],
-    media: [
-      {
-        id: 1,
-        eyebrow: "Facebook profile",
-        title: "Swinburne Vietnam - HCMC",
-        description:
-          "The official Swinburne Vietnam HCMC Facebook presence, where student-facing content, campus updates, and brand storytelling came together.",
-        details: "Swinburne Vietnam Alliance Program",
-        metric: "10K followers",
-        thumbnail: "/assets/portfolio/swinburne-facebook-profile.png",
-        alt: "Swinburne Vietnam HCMC Facebook profile and cover image",
-      },
-      {
-        id: 2,
-        eyebrow: "Event post",
-        title: "Swinburne Experience Day 2025",
-        description:
-          "Admissions and event content introducing prospective students to the Top 1 percent global university program.",
-        details: "Experience Day 2025",
-        thumbnail: "/assets/portfolio/swinburne-experience-day-post.png",
-        alt: "Swinburne Experience Day 2025 Facebook post",
-      },
-      {
-        id: 3,
-        eyebrow: "Video post",
-        title: "Gordon Campbell Interview",
-        description:
-          "Campus video content featuring Dr Gordon Campbell and Swinburne student-life storytelling.",
-        details: "Swinburne Life",
-        metric: "848 reactions",
-        thumbnail: "/assets/portfolio/swinburne-gordon-video-post.png",
-        alt: "Swinburne Life video post featuring Dr Gordon Campbell",
-      },
-      {
-        id: 4,
-        eyebrow: "Campus moment",
-        title: "Student Connection",
-        description:
-          "A student ambassador moment that reflects the warmth and visual identity of Swinburne Vietnam's campus community.",
-        details: "Swinburne Vietnam HCMC",
-        thumbnail: "/assets/portfolio/swinburne-team-red-shirts.png",
-        alt: "Three Swinburne Vietnam students wearing red shirts at a table",
-      },
-    ],
     video: {
       title: "Campus stories in motion",
       caption: "Selected VJ, content creation, and editing work for Swinburne Vietnam - HCMC.",
@@ -455,6 +420,26 @@ export const careerJourneyProjects = [
       poster: "/assets/portfolio/swinburne-vietnam-content-creator-poster.png",
       alt: "Swinburne Vietnam content creator screen recording",
     },
+    videoGallery: [
+      {
+        title: "Swin 101",
+        src: "/assets/portfolio/swinburne-swin-101.mp4",
+        poster: "/assets/portfolio/swinburne-swin-101-poster.jpg",
+        alt: "Swin 101 campus lessons video from Swinburne Vietnam HCMC",
+      },
+      {
+        title: "Cross-cultural Campus Content",
+        src: "/assets/portfolio/swinburne-cultural-connection.mp4",
+        poster: "/assets/portfolio/swinburne-cultural-connection-poster.jpg",
+        alt: "Cross-cultural student content from Swinburne Vietnam HCMC",
+      },
+      {
+        title: "Business Students in Action",
+        src: "/assets/portfolio/swinburne-business-presentation.mp4",
+        poster: "/assets/portfolio/swinburne-business-presentation-poster.jpg",
+        alt: "Business students presenting at Swinburne Vietnam HCMC",
+      },
+    ],
   },
   {
     title: "XOCOATI Saigon",
@@ -500,6 +485,7 @@ export const careerJourneyProjects = [
         details: "Handcrafted Chocolate Workshop",
         metric: "+20% workshop bookings",
         thumbnail: "/assets/portfolio/xocoati-hidden-workshop.png",
+        videoSrc: "/assets/portfolio/xocoati-hidden-workshop-video.mp4",
         alt: "XOCOATI handcrafted chocolate workshop promotional post",
         className: "career-layout-card-tall",
       },
@@ -512,6 +498,7 @@ export const careerJourneyProjects = [
         details: "Ho Chi Minh City",
         metric: "+40% campaign reach",
         thumbnail: "/assets/portfolio/xocoati-date-idea-workshop.png",
+        videoSrc: "/assets/portfolio/xocoati-date-idea-video.mp4",
         alt: "XOCOATI date idea handcrafted chocolate workshop post",
         className: "career-layout-card-tall",
       },
@@ -523,6 +510,7 @@ export const careerJourneyProjects = [
           "A warm product-focused visual highlighting XOCOATI's cocoa drinks, marshmallow, and brownie offering.",
         details: "XOCOATI Saigon",
         thumbnail: "/assets/portfolio/xocoati-cocoa-menu.png",
+        videoSrc: "/assets/portfolio/xocoati-cocoa-drinks-video.mp4",
         alt: "XOCOATI cocoa drinks marshmallow and brownie product post",
         className: "career-layout-card-square",
       },
@@ -589,7 +577,7 @@ export const careerJourneyProjects = [
       },
     ],
   },
-] satisfies CareerJourneyProject[];
+];
 
 const careerJourneyOrder = [
   "Education Network Group Pty Ltd",

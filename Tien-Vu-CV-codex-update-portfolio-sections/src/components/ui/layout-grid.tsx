@@ -64,7 +64,12 @@ export function LayoutGrid({
         {cards.map((card, index) =>
           card.videoSrc ? (
             <figure
-              className={cn("career-layout-card", card.className)}
+              className={cn(
+                "career-layout-card",
+                variant === "portrait-grid" &&
+                  "career-layout-card-portrait-video",
+                card.className,
+              )}
               key={card.id}
             >
               <video

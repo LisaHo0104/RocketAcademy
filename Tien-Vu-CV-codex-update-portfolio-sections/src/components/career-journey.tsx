@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ExternalLink, HeartHandshake } from "lucide-react";
 
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
@@ -72,89 +71,77 @@ function CareerJourneyCopy({
   );
 }
 
-function SwinburneImageTile({
-  className,
-  item,
-  priority = false,
-  sizes,
-}: {
-  className: string;
-  item: CareerJourneyMedia;
-  priority?: boolean;
-  sizes: string;
-}) {
+function WhizKidVideo({ item }: { item: CareerJourneyMedia }) {
+  if (!item.videoSrc) {
+    return null;
+  }
+
   return (
-    <figure className={`career-swinburne-media-tile ${className}`}>
-      <Image
-        alt={item.alt}
-        className="career-swinburne-media-image"
-        fill
-        priority={priority}
-        sizes={sizes}
-        src={item.thumbnail}
+    <figure className="career-whizkid-video-frame">
+      <video
+        aria-label={item.alt}
+        className="career-whizkid-video"
+        controls
+        muted
+        playsInline
+        poster={item.thumbnail}
+        preload="metadata"
+        src={item.videoSrc}
       />
       <figcaption className="sr-only">{item.title}</figcaption>
     </figure>
   );
 }
 
-function SwinburneMediaBoard({
-  media,
-  video,
+function CareerVideoGallery({
+  videos,
 }: {
-  media: CareerJourneyMedia[];
-  video: NonNullable<CareerJourneyProject["video"]>;
+  videos: NonNullable<CareerJourneyProject["videoGallery"]>;
 }) {
-  const [profile, experienceDay, gordonPost, team] = media;
-
-  if (!profile || !experienceDay || !gordonPost || !team) {
-    return null;
-  }
-
   return (
     <div
-      className="career-swinburne-board"
-      aria-label="Swinburne Vietnam selected work"
+      aria-label="More video work from Swinburne Vietnam HCMC"
+      className="career-video-gallery"
     >
-      <SwinburneImageTile
-        className="career-swinburne-profile"
-        item={profile}
-        priority
-        sizes="(max-width: 1020px) 88vw, 52vw"
-      />
-      <SwinburneImageTile
-        className="career-swinburne-post"
-        item={experienceDay}
-        sizes="(max-width: 640px) 42vw, (max-width: 1020px) 38vw, 22vw"
-      />
-      <figure className="career-swinburne-video-frame">
-        <div className="career-swinburne-phone">
+      {videos.map((video) => (
+        <figure className="career-video-gallery-card" key={video.src}>
           <video
             aria-label={video.alt}
-            className="career-swinburne-video"
             controls
             muted
             playsInline
             poster={video.poster}
             preload="metadata"
-          >
-            <source src={video.src} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <figcaption className="sr-only">{video.title}</figcaption>
-      </figure>
-      <SwinburneImageTile
-        className="career-swinburne-post"
-        item={gordonPost}
-        sizes="(max-width: 640px) 42vw, (max-width: 1020px) 38vw, 22vw"
-      />
-      <SwinburneImageTile
-        className="career-swinburne-team"
-        item={team}
-        sizes="(max-width: 1020px) 88vw, 52vw"
-      />
+            src={video.src}
+          />
+          <figcaption>{video.title}</figcaption>
+        </figure>
+      ))}
     </div>
+  );
+}
+
+function CareerFeaturedVideo({
+  video,
+}: {
+  video: NonNullable<CareerJourneyProject["video"]>;
+}) {
+  return (
+    <figure className="career-featured-video">
+      <video
+        aria-label={video.alt}
+        controls
+        muted
+        playsInline
+        poster={video.poster}
+        preload="metadata"
+        src={video.src}
+      />
+      <figcaption>
+        <p>{video.title}</p>
+        <span>{video.caption}</span>
+      </figcaption>
+    </figure>
   );
 }
 
@@ -178,19 +165,38 @@ export function CareerJourney() {
         {careerJourneyProjects.map((project, index) => (
           <article
             className={`career-journey-project ${
-              project.video && project.media?.length === 4
-                ? "career-journey-project-swinburne"
+              project.mediaVariant === "portrait-grid"
+                ? "career-journey-project-whizkid"
+                : ""
+            } ${
+              "videoGallery" in project
+                ? "career-journey-project-swinburne-videos"
                 : ""
             }`}
             key={project.title}
           >
-            {project.video && project.media?.length === 4 ? (
+            {"videoGallery" in project &&
+            project.videoGallery &&
+            project.video ? (
               <>
-                <SwinburneMediaBoard
-                  media={project.media}
-                  video={project.video}
-                />
                 <CareerJourneyCopy index={index} project={project} />
+                <CareerFeaturedVideo video={project.video} />
+                <CareerVideoGallery videos={project.videoGallery} />
+              </>
+            ) : project.mediaVariant === "portrait-grid" && project.media ? (
+              <>
+                <CareerJourneyCopy index={index} project={project} />
+                <WhizKidVideo
+                  item={
+                    project.media.find((item) => item.videoSrc) ??
+                    project.media[project.media.length - 1]
+                  }
+                />
+                <LayoutGrid
+                  cards={project.media.filter((item) => !item.videoSrc)}
+                  className="career-whizkid-gallery"
+                  variant="portrait-grid"
+                />
               </>
             ) : (
               <>
@@ -225,6 +231,9 @@ export function CareerJourney() {
                           src={project.video.src}
                         />
                       </ContainerScroll>
+                    ) : null}
+                    {"videoGallery" in project && project.videoGallery ? (
+                      <CareerVideoGallery videos={project.videoGallery} />
                     ) : null}
                   </div>
                 ) : null}

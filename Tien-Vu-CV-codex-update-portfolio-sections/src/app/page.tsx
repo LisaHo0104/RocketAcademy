@@ -3,11 +3,9 @@ import Image from "next/image";
 import { AcademicJourney } from "@/components/academic-journey";
 import { AcademicProjects } from "@/components/academic-projects";
 import { CareerJourney } from "@/components/career-journey";
-import { CommunicationEngagement } from "@/components/communication-engagement";
 import { ContactSection } from "@/components/contact-section";
-import { CreativePlanning } from "@/components/creative-planning";
 import { IntroGate } from "@/components/intro-gate";
-import { PlanningCoordinationExecution } from "@/components/planning-coordination-execution";
+import { PreparedVideoWork } from "@/components/prepared-video-work";
 import { CometCard } from "@/components/ui/comet-card";
 
 const valueWords = [
@@ -91,9 +89,11 @@ export default function Home() {
               alt=""
               className="lego-hero-art"
               fill
-              priority
+              fetchPriority="high"
+              loading="eager"
               sizes="100vw"
               src="/assets/portfolio/lego-hero-tien-vu-v2.png"
+              unoptimized
             />
 
             <h1 className="sr-only" id="hero-heading">
@@ -195,6 +195,8 @@ export default function Home() {
           </div>
         </section>
 
+        <PreparedVideoWork />
+
         <CareerJourney />
 
         <AcademicJourney />
@@ -225,12 +227,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-
-        <CommunicationEngagement />
-
-        <PlanningCoordinationExecution />
-
-        <CreativePlanning />
 
         <section
           aria-label="Marketing journey statement"

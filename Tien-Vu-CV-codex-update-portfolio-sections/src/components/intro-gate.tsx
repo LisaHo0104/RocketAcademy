@@ -49,15 +49,13 @@ export function IntroGate() {
   const [started, setStarted] = useState(false);
   const [finished, setFinished] = useState(false);
   const [rotationTurns, setRotationTurns] = useState(3);
-  const sectionLabels = ["Skills", "Contacts", "Work Projects", "Work Experience"];
-  const activeSection = ((rotationTurns % sectionLabels.length) + sectionLabels.length) % sectionLabels.length;
-  const previousSection = (activeSection + 1) % sectionLabels.length;
-  const nextSection = (activeSection - 1 + sectionLabels.length) % sectionLabels.length;
+  const activeSection = ((rotationTurns % 4) + 4) % 4 === 1 ? "Contacts" : "Work Experience";
+  const otherSection = activeSection === "Contacts" ? "Work Experience" : "Contacts";
 
   function rotateScene(direction: 1 | -1) {
     if (started) return;
     playMouseClick();
-    setRotationTurns((turns) => turns + direction);
+    setRotationTurns((turns) => turns + direction * 2);
   }
 
   function startIntro() {
@@ -88,7 +86,7 @@ export function IntroGate() {
           <LegoIntroScene rotationTurns={rotationTurns} started={started} />
 
           <button
-            aria-label={`Previous scene: ${sectionLabels[previousSection]}`}
+            aria-label={`Previous scene: ${otherSection}`}
             className="lego-intro-side lego-intro-side-left"
             disabled={started}
             onClick={() => rotateScene(1)}
@@ -106,16 +104,16 @@ export function IntroGate() {
                 />
               </svg>
             </span>
-            <span>{sectionLabels[previousSection]}</span>
+            <span>{otherSection}</span>
           </button>
           <button
-            aria-label={`Next scene: ${sectionLabels[nextSection]}`}
+            aria-label={`Next scene: ${otherSection}`}
             className="lego-intro-side lego-intro-side-right"
             disabled={started}
             onClick={() => rotateScene(-1)}
             type="button"
           >
-            <span>{sectionLabels[nextSection]}</span>
+            <span>{otherSection}</span>
             <span className="lego-intro-arrow">
               <svg aria-hidden="true" viewBox="0 0 20 28">
                 <path
@@ -140,6 +138,12 @@ export function IntroGate() {
             tabIndex={started ? -1 : 0}
             type="button"
           >
+            <span aria-hidden="true" className="lego-intro-cta-pointer">
+              <svg viewBox="0 0 150 100">
+                <path d="M139 13C101 4 72 27 53 69" />
+                <path d="M50 43 52 71 80 63" />
+              </svg>
+            </span>
             <span>{started ? "Building..." : "Enter Portfolio"}</span>
             <svg aria-hidden="true" viewBox="0 0 28 28">
               <path d="M6 14h15M15 8l6 6-6 6" />

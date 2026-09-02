@@ -4035,6 +4035,39 @@
   stroke-width: 2.7;
 }
 
+.lego-intro-cta-pointer {
+  position: absolute;
+  top: -88px;
+  right: -36px;
+  z-index: 5;
+  display: block;
+  width: 132px;
+  pointer-events: none;
+  transform-origin: 30% 80%;
+}
+
+.lego-intro-cta-pointer svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: #e11e2f;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 8;
+  filter: drop-shadow(3px 4px 0 rgba(17, 16, 20, 0.72));
+  animation: lego-cta-pointer-nudge 850ms ease-in-out infinite alternate;
+}
+
+@keyframes lego-cta-pointer-nudge {
+  from {
+    transform: translate(5px, -5px) rotate(2deg);
+  }
+  to {
+    transform: translate(0, 2px) rotate(-2deg);
+  }
+}
+
 @media (max-width: 900px) {
   .lego-intro-brand {
     top: 72px;
@@ -4058,6 +4091,12 @@
 
   .lego-intro-action {
     bottom: 34px;
+  }
+
+  .lego-intro-cta-pointer {
+    top: -76px;
+    right: -8px;
+    width: 108px;
   }
 }
 
@@ -4113,7 +4152,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lego-intro-loading::after {
+  .lego-intro-loading::after,
+  .lego-intro-cta-pointer svg {
     animation: none;
   }
 }

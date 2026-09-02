@@ -35,33 +35,6 @@ const brickLength = 2;
 const studDepth = 0.1;
 const sectionColors = [theme.dark, theme.secondary, theme.primary, theme.focus];
 
-const skillColumns = [
-  [
-    ["TypeScript", "#168ac2"],
-    ["Node.js", "#a8cc3a"],
-    ["JavaScript", "#f3c744"],
-    ["AWS", "#f5a623"],
-    ["PostgreSQL", "#4c7d91"],
-    ["React", "#9bdde2"],
-  ],
-  [
-    ["Express", "#111111"],
-    ["Docker", "#159bc4"],
-    ["Tailwind", "#23b5c2"],
-    ["GraphQL", "#d92c87"],
-    ["Git", "#e84622"],
-    ["Nest.js", "#dd2146"],
-  ],
-  [
-    ["Material UI", "#139aaa"],
-    ["SQLite", "#147db1"],
-    ["NGINX", "#128516"],
-    ["Jest", "#963c4a"],
-    ["HTML", "#e96327"],
-    ["CSS", "#12638d"],
-  ],
-] as const;
-
 function clamp(value: number, min = 0, max = 1) {
   return Math.min(Math.max(value, min), max);
 }
@@ -260,6 +233,101 @@ function createFloor(
   return { group, material, base };
 }
 
+function createExternalLinkTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 256;
+  canvas.height = 256;
+  const context = canvas.getContext("2d");
+
+  if (!context) return null;
+
+  context.strokeStyle = "#ffffff";
+  context.lineWidth = 17;
+  context.lineCap = "round";
+  context.lineJoin = "round";
+  context.shadowColor = "rgba(255, 255, 255, 0.9)";
+  context.shadowBlur = 14;
+
+  context.beginPath();
+  context.moveTo(112, 58);
+  context.lineTo(66, 58);
+  context.quadraticCurveTo(48, 58, 48, 76);
+  context.lineTo(48, 190);
+  context.quadraticCurveTo(48, 208, 66, 208);
+  context.lineTo(180, 208);
+  context.quadraticCurveTo(198, 208, 198, 190);
+  context.lineTo(198, 144);
+  context.stroke();
+
+  context.beginPath();
+  context.moveTo(111, 145);
+  context.lineTo(207, 49);
+  context.moveTo(153, 49);
+  context.lineTo(207, 49);
+  context.lineTo(207, 103);
+  context.stroke();
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
+
+function createPhoneSignTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 512;
+  const context = canvas.getContext("2d");
+
+  if (!context) return null;
+
+  context.fillStyle = "#f8efd6";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "#16856b";
+  context.beginPath();
+  context.arc(256, 256, 184, 0, Math.PI * 2);
+  context.fill();
+
+  context.save();
+  context.translate(88, 88);
+  context.scale(14, 14);
+  context.strokeStyle = "#ffffff";
+  context.lineWidth = 2.35;
+  context.lineCap = "round";
+  context.lineJoin = "round";
+  context.stroke(
+    new Path2D(
+      "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z",
+    ),
+  );
+  context.restore();
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.flipY = false;
+  return texture;
+}
+
+function createBlankSignTexture() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 512;
+  const context = canvas.getContext("2d");
+
+  if (!context) return null;
+
+  context.fillStyle = "#f8efd6";
+  context.beginPath();
+  context.arc(256, 256, 226, 0, Math.PI * 2);
+  context.fill();
+  context.strokeStyle = "#d6c6a1";
+  context.lineWidth = 18;
+  context.stroke();
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
+}
+
 export function LegoIntroScene({ rotationTurns, started }: LegoIntroSceneProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -373,44 +441,102 @@ export function LegoIntroScene({ rotationTurns, started }: LegoIntroSceneProps) 
     addFigure("Junior", [5.5, 0, -3], Math.PI);
     addFigure("Senior", [2.5, 1, -3], Math.PI);
 
-    const projectPositions = [
-      { position: [-dimensions.width, 0, -dimensions.width - Math.max(2, dimensions.width / 2 - 0.5)] as const, rotation: (3 * Math.PI) / 2 },
-      { position: [-dimensions.width - Math.max(2, dimensions.width / 2 - 0.5), 0, -dimensions.width] as const, rotation: Math.PI },
-      { position: [-dimensions.width, 0, -dimensions.width] as const, rotation: (5 * Math.PI) / 4 },
-    ];
-    projectPositions.forEach(({ position, rotation }) => {
-      gltfLoader.load(`${legoAssetBase}/Laptop.glb`, (gltf) => {
-        if (disposed) return;
-        gltf.scene.position.set(...position);
-        gltf.scene.rotation.y = rotation;
-        prepareModel(gltf.scene);
-        display.add(gltf.scene);
-      });
-    });
-
     const contactModels = [
-      { file: "Spaceman", animation: "look_left" },
-      { file: "Overalls", animation: "look_right" },
-      { file: "Pirate", animation: "look_left" },
-      { file: "Knight", animation: "look_right" },
+      {
+        file: "Spaceman",
+        animation: "look_left",
+        href: "https://www.linkedin.com/in/tia-tien-vu",
+      },
+      {
+        file: "Overalls",
+        animation: "look_right",
+        href: "mailto:jocastavutien@gmail.com",
+      },
+      {
+        file: "Pirate",
+        animation: "look_left",
+        href: "tel:+61404715735",
+      },
+      {
+        file: "Knight",
+        animation: "look_right",
+        href: null,
+      },
     ] as const;
     const contactOrigin = THREE.MathUtils.clamp(
       dimensions.width,
       1.5,
       Math.floor(camera.position.length() / 2),
     );
-    contactModels.forEach(({ file, animation }, index) => {
+    const externalLinkTexture = createExternalLinkTexture();
+    const externalLinkMaterial = externalLinkTexture
+      ? new THREE.SpriteMaterial({
+          map: externalLinkTexture,
+          depthWrite: false,
+          toneMapped: false,
+          transparent: true,
+        })
+      : null;
+    const contactIndicators: THREE.Sprite[] = [];
+    const clickableContacts: THREE.Object3D[] = [];
+    const contactHrefByObject = new WeakMap<THREE.Object3D, string>();
+    const phoneSignTexture = createPhoneSignTexture();
+    const phoneSignMaterial = phoneSignTexture
+      ? new THREE.MeshStandardMaterial({
+          map: phoneSignTexture,
+          metalness: 0.1,
+          roughness: 0.35,
+          side: THREE.DoubleSide,
+        })
+      : null;
+    const blankSignTexture = createBlankSignTexture();
+    const blankSignMaterial = blankSignTexture
+      ? new THREE.SpriteMaterial({
+          map: blankSignTexture,
+          depthWrite: false,
+          toneMapped: false,
+          transparent: true,
+        })
+      : null;
+
+    contactModels.forEach(({ file, animation, href }, index) => {
       const isEven = index % 2 === 0;
       const offset = (Math.floor(index / 2) + 1) * 2.5 - 1;
+      const x = isEven ? -contactOrigin - offset : -contactOrigin;
+      const z = isEven ? contactOrigin : contactOrigin + offset;
+
+      if (externalLinkMaterial && href) {
+        const indicator = new THREE.Sprite(externalLinkMaterial);
+        indicator.position.set(x, 3.15, z);
+        indicator.scale.setScalar(0.68);
+        indicator.renderOrder = 3;
+        display.add(indicator);
+        contactIndicators.push(indicator);
+      }
+
       gltfLoader.load(`${legoAssetBase}/${file}.glb`, (gltf) => {
         if (disposed) return;
-        gltf.scene.position.set(
-          isEven ? -contactOrigin - offset : -contactOrigin,
-          0,
-          isEven ? contactOrigin : contactOrigin + offset,
-        );
+        gltf.scene.position.set(x, 0, z);
         gltf.scene.rotation.y = isEven ? 0 : -Math.PI / 2;
         prepareModel(gltf.scene);
+
+        if (file === "Pirate" && phoneSignMaterial) {
+          const sign = gltf.scene.getObjectByName("pirate_sign") as THREE.Mesh | undefined;
+          if (sign) sign.material = phoneSignMaterial;
+        }
+
+        if (file === "Knight" && blankSignMaterial) {
+          const blankSign = new THREE.Sprite(blankSignMaterial);
+          blankSign.position.set(0.72, 1.2, 0.82);
+          blankSign.scale.setScalar(1.42);
+          blankSign.renderOrder = 3;
+          gltf.scene.add(blankSign);
+        }
+
+        if (href) {
+          gltf.scene.traverse((child) => contactHrefByObject.set(child, href));
+          clickableContacts.push(gltf.scene);
+        }
         display.add(gltf.scene);
         const clip = gltf.animations.find((entry) => entry.name === animation);
         if (clip) {
@@ -421,59 +547,42 @@ export function LegoIntroScene({ rotationTurns, started }: LegoIntroSceneProps) 
       });
     });
 
-    const skillResources: Array<THREE.Texture | THREE.Material | THREE.BufferGeometry> = [];
-    skillColumns.forEach((column, columnIndex) => {
-      column.forEach(([label, color], rowIndex) => {
-        const skill = new THREE.Group();
-        const bodyGeometry = new THREE.BoxGeometry(2, 0.58, 1);
-        const bodyMaterial = new THREE.MeshStandardMaterial({ color, roughness: 0.28 });
-        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
-        body.castShadow = true;
-        body.receiveShadow = true;
-        skill.add(body);
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    const getContactHref = (event: PointerEvent) => {
+      const activeSection = ((rotationTurnsRef.current % 4) + 4) % 4;
+      if (activeSection !== 1) return null;
 
-        for (let studIndex = 0; studIndex < 4; studIndex += 1) {
-          const studGeometry = new THREE.CylinderGeometry(0.16, 0.16, 0.1, 18);
-          const stud = new THREE.Mesh(studGeometry, bodyMaterial);
-          stud.position.set(studIndex % 2 === 0 ? -0.5 : 0.5, 0.34, 0);
-          skill.add(stud);
-          skillResources.push(studGeometry);
-        }
+      const bounds = canvas.getBoundingClientRect();
+      pointer.set(
+        ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
+        -((event.clientY - bounds.top) / bounds.height) * 2 + 1,
+      );
+      raycaster.setFromCamera(pointer, camera);
+      const hit = raycaster.intersectObjects(clickableContacts, true)[0];
+      return hit ? contactHrefByObject.get(hit.object) ?? null : null;
+    };
+    const handlePointerMove = (event: PointerEvent) => {
+      canvas.style.cursor = getContactHref(event) ? "pointer" : "default";
+    };
+    const handlePointerLeave = () => {
+      canvas.style.cursor = "default";
+    };
+    const handleContactClick = (event: PointerEvent) => {
+      const href = getContactHref(event);
+      if (!href) return;
 
-        const labelCanvas = document.createElement("canvas");
-        labelCanvas.width = 512;
-        labelCanvas.height = 128;
-        const labelContext = labelCanvas.getContext("2d");
-        if (labelContext) {
-          labelContext.clearRect(0, 0, 512, 128);
-          labelContext.fillStyle = "#fff";
-          labelContext.font = "700 56px monospace";
-          labelContext.textAlign = "center";
-          labelContext.textBaseline = "middle";
-          labelContext.fillText(label, 256, 67);
-        }
-        const labelTexture = new THREE.CanvasTexture(labelCanvas);
-        labelTexture.colorSpace = THREE.SRGBColorSpace;
-        const labelMaterial = new THREE.MeshBasicMaterial({
-          map: labelTexture,
-          transparent: true,
-          depthWrite: false,
-        });
-        const labelGeometry = new THREE.PlaneGeometry(1.82, 0.45);
-        const labelMesh = new THREE.Mesh(labelGeometry, labelMaterial);
-        labelMesh.position.set(0, 0, 0.506);
-        skill.add(labelMesh);
+      if (href.startsWith("http")) {
+        window.open(href, "_blank", "noopener,noreferrer");
+      } else {
+        window.location.href = href;
+      }
+    };
+    canvas.addEventListener("pointermove", handlePointerMove);
+    canvas.addEventListener("pointerleave", handlePointerLeave);
+    canvas.addEventListener("click", handleContactClick);
 
-        skill.position.set(
-          3 + columnIndex * 2,
-          3 - rowIndex * 0.6,
-          7 - columnIndex * 2,
-        );
-        skill.rotation.y = columnIndex % 2 === 0 ? Math.PI / 2 : 0;
-        display.add(skill);
-        skillResources.push(bodyGeometry, bodyMaterial, labelTexture, labelMaterial, labelGeometry);
-      });
-    });
+    const titleResources: Array<THREE.Texture | THREE.Material | THREE.BufferGeometry> = [];
 
     const createTitlePlane = (kind: "name" | "portfolio") => {
       const titleCanvas = document.createElement("canvas");
@@ -528,7 +637,7 @@ export function LegoIntroScene({ rotationTurns, started }: LegoIntroSceneProps) 
         kind === "name" ? 6.7 : 6.2,
         kind === "name" ? 2.46 : 3.1,
       );
-      skillResources.push(titleTexture, titleMaterial, titleGeometry);
+      titleResources.push(titleTexture, titleMaterial, titleGeometry);
       return new THREE.Mesh(titleGeometry, titleMaterial);
     };
 
@@ -605,6 +714,9 @@ export function LegoIntroScene({ rotationTurns, started }: LegoIntroSceneProps) 
       });
 
       mixers.forEach((mixer) => mixer.update(delta));
+      contactIndicators.forEach((indicator, index) => {
+        indicator.position.y = 3.15 + Math.sin(elapsed * 2 + index * 0.4) * 0.0625;
+      });
 
       display.rotation.y = THREE.MathUtils.damp(
         display.rotation.y,
@@ -631,6 +743,9 @@ export function LegoIntroScene({ rotationTurns, started }: LegoIntroSceneProps) 
       disposed = true;
       window.cancelAnimationFrame(animationFrame);
       resizeObserver.disconnect();
+      canvas.removeEventListener("pointermove", handlePointerMove);
+      canvas.removeEventListener("pointerleave", handlePointerLeave);
+      canvas.removeEventListener("click", handleContactClick);
       mixers.forEach((mixer) => mixer.stopAllAction());
       scene.environment?.dispose();
       brickGeometry.brick.dispose();
@@ -640,7 +755,13 @@ export function LegoIntroScene({ rotationTurns, started }: LegoIntroSceneProps) 
       floor.base.geometry.dispose();
       desk.geometry.dispose();
       deskMaterial.dispose();
-      skillResources.forEach((resource) => resource.dispose());
+      externalLinkMaterial?.dispose();
+      externalLinkTexture?.dispose();
+      phoneSignMaterial?.dispose();
+      phoneSignTexture?.dispose();
+      blankSignMaterial?.dispose();
+      blankSignTexture?.dispose();
+      titleResources.forEach((resource) => resource.dispose());
       dracoLoader.dispose();
       ktx2Loader.dispose();
       renderer.dispose();

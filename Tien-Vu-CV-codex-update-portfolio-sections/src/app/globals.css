@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-nunito-sans), "Nunito Sans", Arial, sans-serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
-  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-heading: var(--font-barlow-condensed), "Arial Narrow", Arial, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,6 +46,20 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* LEGO-inspired colour and typography system. */
+:root {
+  --lego-blue: #006db7;
+  --lego-blue-deep: #004f9e;
+  --lego-red: #d91f26;
+  --lego-red-deep: #b5161b;
+  --lego-yellow: #ffd500;
+  --lego-green: #009b4d;
+  --lego-ink: #172033;
+  --lego-paper: #fffdf7;
+  --lego-paper-soft: #f5f2e9;
+  --lego-line: #d7d5cd;
 }
 
 :root {
@@ -554,12 +568,13 @@
   right: 0;
   left: 0;
   z-index: 2;
-  height: 18px;
+  height: 36px;
   pointer-events: none;
   content: "";
-  background:
-    linear-gradient(135deg, #fff7e8 12px, transparent 0) 0 0 / 24px 18px,
-    linear-gradient(225deg, #fff7e8 12px, transparent 0) 0 0 / 24px 18px;
+  background-image: url("/assets/portfolio/about-lego-divider.png");
+  background-repeat: repeat-x;
+  background-position: center top;
+  background-size: auto 36px;
 }
 
 .values-cloud {
@@ -620,14 +635,33 @@
   top: 50%;
   left: 50%;
   z-index: -1;
-  width: clamp(132px, 72%, 280px);
-  aspect-ratio: 1;
+  width: clamp(190px, 88%, 320px);
+  aspect-ratio: 1.62;
   pointer-events: none;
   content: "";
   opacity: 0;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.48) 36%, rgba(255, 255, 255, 0) 72%);
-  border-radius: 50%;
-  filter: blur(9px);
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(255, 255, 255, 0.24) 54%,
+    rgba(255, 255, 255, 0.14) 100%
+  );
+  -webkit-mask:
+    radial-gradient(ellipse 10% 14% at 14% 17%, #000 96%, transparent 100%) no-repeat,
+    radial-gradient(ellipse 10% 14% at 38% 17%, #000 96%, transparent 100%) no-repeat,
+    radial-gradient(ellipse 10% 14% at 62% 17%, #000 96%, transparent 100%) no-repeat,
+    radial-gradient(ellipse 10% 14% at 86% 17%, #000 96%, transparent 100%) no-repeat,
+    linear-gradient(#000 0 0) center bottom / 100% 72% no-repeat;
+  mask:
+    radial-gradient(ellipse 10% 14% at 14% 17%, #000 96%, transparent 100%) no-repeat,
+    radial-gradient(ellipse 10% 14% at 38% 17%, #000 96%, transparent 100%) no-repeat,
+    radial-gradient(ellipse 10% 14% at 62% 17%, #000 96%, transparent 100%) no-repeat,
+    radial-gradient(ellipse 10% 14% at 86% 17%, #000 96%, transparent 100%) no-repeat,
+    linear-gradient(#000 0 0) center bottom / 100% 72% no-repeat;
+  filter:
+    drop-shadow(0 0 6px rgba(255, 255, 255, 0.9))
+    drop-shadow(0 0 16px rgba(255, 255, 255, 0.62))
+    drop-shadow(0 0 34px rgba(255, 255, 255, 0.34));
   transform: translate(-50%, -50%) scale(0.92);
   transition:
     opacity 180ms ease,
@@ -638,16 +672,24 @@
   position: absolute;
   top: calc(100% + 8px);
   left: 50%;
-  width: 220px;
+  width: min(360px, 82vw);
   pointer-events: none;
   content: attr(data-description);
   opacity: 0;
   color: #eadcc5;
   font-family: var(--font-inter), Arial, sans-serif;
-  font-size: 15px;
+  font-size: clamp(18px, 1.5vw, 22px);
   font-style: normal;
+  font-weight: 750;
   line-height: 1.4;
+  letter-spacing: 0.01em;
   text-align: center;
+  -webkit-text-stroke: 0.6px rgba(110, 50, 0, 0.92);
+  paint-order: stroke fill;
+  text-shadow:
+    0 2px 0 rgba(110, 50, 0, 0.82),
+    0 3px 8px rgba(0, 0, 0, 0.34),
+    0 0 6px rgba(255, 213, 0, 0.72);
   transform: translate(-50%, 8px);
   transition:
     opacity 180ms ease,
@@ -658,8 +700,8 @@
 .values-word:focus-visible {
   color: #fff7e8;
   text-shadow:
-    0 0 7px rgba(255, 255, 255, 0.78),
-    0 0 16px rgba(255, 255, 255, 0.54);
+    0 1px 1px rgba(0, 79, 158, 0.44),
+    0 0 4px rgba(255, 255, 255, 0.5);
   outline: 0;
   transform: translateY(-4px);
 }
@@ -783,8 +825,8 @@
   }
 
   .values-word::after {
-    width: 180px;
-    font-size: 13px;
+    width: min(340px, 84vw);
+    font-size: clamp(17px, 2.2vw, 20px);
   }
 }
 
@@ -815,6 +857,12 @@
     width: max-content;
     max-width: 100%;
     font-size: 42px;
+  }
+
+  .values-word::after {
+    width: min(320px, 86vw);
+    font-size: 18px;
+    line-height: 1.28;
   }
 
   .value-word-empathetic,
@@ -858,13 +906,15 @@
   min-height: 100svh;
   padding: clamp(72px, 9vw, 132px) 22px;
   overflow: hidden;
-  color: #36231d;
-  background-color: #fff7e8;
+  color: #29364b;
+  background-color: #fff5df;
   background-image:
-    linear-gradient(rgba(82, 51, 46, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(82, 51, 46, 0.035) 1px, transparent 1px),
-    linear-gradient(135deg, rgba(216, 170, 163, 0.28), rgba(143, 150, 128, 0.16) 54%, rgba(255, 247, 232, 0));
-  background-size: 34px 34px, 34px 34px, cover;
+    linear-gradient(rgba(54, 75, 104, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(54, 75, 104, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 4% 12%, rgba(233, 143, 132, 0.34), transparent 30%),
+    radial-gradient(circle at 92% 18%, rgba(151, 184, 220, 0.34), transparent 32%),
+    radial-gradient(circle at 54% 100%, rgba(247, 215, 123, 0.3), transparent 35%);
+  background-size: 34px 34px, 34px 34px, cover, cover, cover;
 }
 
 .about-section::before {
@@ -872,12 +922,13 @@
   top: 0;
   right: 0;
   left: 0;
-  height: 18px;
+  height: 36px;
   pointer-events: none;
   content: "";
-  background:
-    linear-gradient(135deg, #4d3028 12px, transparent 0) 0 0 / 24px 18px,
-    linear-gradient(225deg, #4d3028 12px, transparent 0) 0 0 / 24px 18px;
+  background-image: url("/assets/portfolio/about-lego-divider.png");
+  background-repeat: repeat-x;
+  background-position: center top;
+  background-size: auto 36px;
 }
 
 .about-inner {
@@ -896,7 +947,7 @@
 
 .about-kicker {
   margin: 0 0 18px;
-  color: #735a4e;
+  color: #b65f58;
   font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
   font-size: 12px;
   font-weight: 800;
@@ -908,7 +959,7 @@
 .about-heading {
   max-width: 720px;
   margin: 0;
-  color: #36231d;
+  color: #29364b;
   font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   font-size: clamp(68px, 9vw, 132px);
   font-style: italic;
@@ -923,7 +974,7 @@
   gap: 18px;
   max-width: 620px;
   margin-top: clamp(26px, 4vw, 46px);
-  color: #4d3028;
+  color: #46536a;
   font-size: clamp(17px, 1.45vw, 21px);
   font-weight: 300;
   line-height: 1.72;
@@ -935,50 +986,82 @@
 
 .about-tags {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: flex-end;
-  gap: 12px;
-  margin-top: 34px;
+  gap: 14px;
+  margin-top: 48px;
 }
 
 .about-lego-tag {
+  --tag-color: var(--lego-blue);
+  --tag-color-deep: var(--lego-blue-deep);
+  --tag-tooth-size: 16.6667%;
   position: relative;
-  display: inline-block;
-  flex: 0 0 clamp(165px, 13.5vw, 190px);
-  aspect-ratio: 2.12;
-  filter: drop-shadow(0 9px 7px rgba(77, 48, 40, 0.2));
+  display: inline-grid;
+  place-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 190px;
+  aspect-ratio: 3.5;
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 20%),
+    linear-gradient(180deg, var(--tag-color), var(--tag-color-deep));
+  border: 1px solid color-mix(in srgb, var(--tag-color-deep) 76%, #000 24%);
+  border-radius: 5px 5px 3px 3px;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    0 8px 12px rgba(41, 54, 75, 0.2);
 }
 
-.about-lego-tag-wide {
-  flex-basis: clamp(210px, 17vw, 240px);
-  aspect-ratio: 2.28;
+.about-lego-tag::before {
+  position: absolute;
+  right: 4%;
+  bottom: calc(100% - 1px);
+  left: 4%;
+  height: clamp(12px, 1.1vw, 15px);
+  content: "";
+  background: linear-gradient(
+      90deg,
+      var(--tag-color) 0 calc(100% - 6px),
+      transparent calc(100% - 6px)
+    )
+    left bottom / var(--tag-tooth-size) 100% repeat-x;
+  filter: drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.14));
 }
 
-.about-lego-tag-art {
-  object-fit: contain;
+.about-lego-tag-red {
+  --tag-color: #e23636;
+  --tag-color-deep: #bd2727;
+}
+
+.about-lego-tag-yellow {
+  --tag-color: #ffd85a;
+  --tag-color-deep: #efbd3d;
+  color: #211b17;
+}
+
+.about-lego-tag-blue {
+  --tag-color: #176bc0;
+  --tag-color-deep: #0e4ea6;
 }
 
 .about-lego-tag-label {
-  position: absolute;
   z-index: 1;
-  top: 69%;
-  right: 12%;
-  left: 12%;
-  color: #fff8e8;
+  padding: 0 12%;
+  color: inherit;
   font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(10px, 0.9vw, 13px);
+  font-size: clamp(11px, 1vw, 14px);
   font-weight: 900;
   line-height: 1;
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 0.09em;
-  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.42);
+  letter-spacing: 0.075em;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.34);
   white-space: nowrap;
-  transform: translateY(-50%);
 }
 
-.about-lego-tag:nth-child(2) .about-lego-tag-label {
-  color: #211b17;
+.about-lego-tag-yellow .about-lego-tag-label {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
@@ -991,9 +1074,9 @@
   width: 100%;
   margin: 0;
   padding: 10px 10px 18px;
-  color: #fff7e8;
-  background: #4d3028;
-  border: 1px solid rgba(255, 247, 232, 0.36);
+  color: #fff8e8;
+  background: #536f96;
+  border: 1px solid rgba(255, 248, 232, 0.58);
   border-radius: 8px;
   transform: rotate(1.5deg);
 }
@@ -1002,13 +1085,13 @@
   position: relative;
   aspect-ratio: 1084 / 724;
   overflow: hidden;
-  background: #321f1a;
+  background: #344b6b;
   border-radius: 6px;
 }
 
 .about-photo-frame figcaption {
   margin: 14px 4px 0;
-  color: rgba(255, 247, 232, 0.82);
+  color: rgba(255, 248, 232, 0.9);
   font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -1039,18 +1122,22 @@
 
   .about-tags {
     gap: 8px;
+    margin-top: 42px;
   }
 
   .about-lego-tag {
-    flex-basis: min(44vw, 174px);
-  }
-
-  .about-lego-tag-wide {
-    flex-basis: min(56vw, 216px);
+    flex-basis: 0;
   }
 
   .about-lego-tag-label {
-    font-size: clamp(8px, 2.5vw, 11px);
+    padding-inline: 4px;
+    font-size: clamp(7px, 2.15vw, 10px);
+    letter-spacing: 0.035em;
+  }
+
+  .about-lego-tag::before {
+    height: 10px;
+    background-size: var(--tag-tooth-size) 100%;
   }
 }
 
@@ -1071,12 +1158,13 @@
   top: 0;
   right: 0;
   left: 0;
-  height: 18px;
+  height: 36px;
   pointer-events: none;
   content: "";
-  background:
-    linear-gradient(135deg, #fff7e8 12px, transparent 0) 0 0 / 24px 18px,
-    linear-gradient(225deg, #fff7e8 12px, transparent 0) 0 0 / 24px 18px;
+  background-image: url("/assets/portfolio/about-lego-divider.png");
+  background-repeat: repeat-x;
+  background-position: center top;
+  background-size: auto 36px;
 }
 
 .academic-timeline {
@@ -1332,12 +1420,13 @@
   top: 0;
   right: 0;
   left: 0;
-  height: 18px;
+  height: 36px;
   pointer-events: none;
   content: "";
-  background:
-    linear-gradient(135deg, #fff7e8 12px, transparent 0) 0 0 / 24px 18px,
-    linear-gradient(225deg, #fff7e8 12px, transparent 0) 0 0 / 24px 18px;
+  background-image: url("/assets/portfolio/about-lego-divider.png");
+  background-repeat: repeat-x;
+  background-position: center top;
+  background-size: auto 36px;
 }
 
 .academic-projects-inner {
@@ -1435,12 +1524,13 @@
   top: 0;
   right: 0;
   left: 0;
-  height: 18px;
+  height: 36px;
   pointer-events: none;
   content: "";
-  background:
-    linear-gradient(135deg, #4d3028 12px, transparent 0) 0 0 / 24px 18px,
-    linear-gradient(225deg, #4d3028 12px, transparent 0) 0 0 / 24px 18px;
+  background-image: url("/assets/portfolio/about-lego-divider.png");
+  background-repeat: repeat-x;
+  background-position: center top;
+  background-size: auto 36px;
 }
 
 .career-journey-inner {
@@ -1536,6 +1626,24 @@
   text-decoration: none;
 }
 
+.career-journey-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 14px;
+}
+
+.career-journey-title-separator {
+  color: #b56449;
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: 46px;
+  line-height: 1;
+}
+
+.career-journey-project-link {
+  font-size: 46px;
+}
+
 .career-journey-title-link:hover {
   color: #2f5f68;
 }
@@ -1589,6 +1697,7 @@
 }
 
 .career-journey-highlights div {
+  min-width: 0;
   padding-top: 14px;
   border-top: 1px solid rgba(88, 115, 93, 0.45);
 }
@@ -1596,10 +1705,11 @@
 .career-journey-highlights dt {
   color: #b56449;
   font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  font-size: 34px;
+  font-size: clamp(24px, 2.2vw, 34px);
   font-weight: 700;
   line-height: 0.95;
   letter-spacing: 0;
+  overflow-wrap: anywhere;
 }
 
 .career-journey-highlights dd {
@@ -1608,6 +1718,7 @@
   font-size: 12px;
   font-weight: 700;
   line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .career-journey-media {
@@ -2482,15 +2593,19 @@
 .creative-journey-quote {
   display: grid;
   min-height: min(56.2vw, 1064px);
-  padding: clamp(64px, 8vw, 152px) clamp(22px, 4.5vw, 86px);
+  padding: clamp(150px, 14vw, 250px) clamp(120px, 12vw, 230px);
   place-items: center;
-  background: #4d3028;
+  background-color: #f8f8f5;
+  background-image: url("/assets/portfolio/creative-journey-lego-frame.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
 }
 
 .creative-journey-quote blockquote {
   width: min(100%, 1760px);
   margin: 0;
-  color: #fffaf0;
+  color: var(--lego-blue-deep);
   font-family: var(--font-pinyon-script), var(--font-cormorant), Georgia, serif;
   font-size: clamp(48px, 5.15vw, 98px);
   font-weight: 400;
@@ -3253,12 +3368,13 @@
 
   .creative-journey-quote {
     min-height: 72svh;
-    padding: 64px 22px;
+    padding: clamp(116px, 17vh, 154px) clamp(48px, 12vw, 72px);
+    background-size: cover;
   }
 
   .creative-journey-quote blockquote {
-    font-size: clamp(43px, 13.5vw, 66px);
-    line-height: 0.98;
+    font-size: clamp(38px, 11.5vw, 58px);
+    line-height: 0.96;
   }
 
   .creative-journey-quote span {
@@ -4941,4 +5057,345 @@
   .lego-hero-cta-link::after {
     content: "EXPLORE SELECTED WORK  →";
   }
+}
+
+/* Keep the existing composition intact while shifting the visual language to
+   the bright primary palette and sturdy type seen in the reference board. */
+:root {
+  --background: var(--lego-paper-soft);
+  --foreground: var(--lego-ink);
+  --paper: var(--lego-paper);
+  --paper-deep: var(--lego-paper-soft);
+  --brown: var(--lego-blue);
+  --brown-deep: var(--lego-blue-deep);
+  --ink: var(--lego-ink);
+  --muted-ink: #4b5563;
+  --rose: var(--lego-red);
+  --sage: var(--lego-green);
+  --cream: var(--lego-paper);
+  --card: #ffffff;
+  --card-foreground: var(--lego-ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--lego-ink);
+  --primary: var(--lego-blue);
+  --primary-foreground: #ffffff;
+  --secondary: var(--lego-yellow);
+  --secondary-foreground: var(--lego-ink);
+  --muted: var(--lego-paper-soft);
+  --muted-foreground: #4b5563;
+  --accent: var(--lego-red);
+  --accent-foreground: #ffffff;
+  --border: var(--lego-line);
+  --input: var(--lego-line);
+  --ring: var(--lego-blue);
+  --chart-1: var(--lego-blue);
+  --chart-2: var(--lego-red);
+  --chart-3: var(--lego-yellow);
+  --chart-4: var(--lego-green);
+  --chart-5: var(--lego-blue-deep);
+}
+
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-nunito-sans), "Nunito Sans", Arial, sans-serif;
+}
+
+.font-display,
+.hero-name,
+.hero-statement,
+.values-quote,
+.values-word,
+.about-heading,
+.academic-timeline-header h2,
+.academic-entry-context,
+.academic-entry-copy h3,
+.academic-gpa-note span,
+.academic-gpa-note small,
+.academic-projects-heading h2,
+.career-journey-heading h2,
+.career-journey-title-link,
+.career-video-heading,
+.career-layout-card-copy strong,
+.career-layout-expanded-copy h3,
+.communication-title-band h2,
+.communication-pillars p,
+.planning-title-band h2,
+.planning-label,
+.creative-planning-title-band h2,
+.creative-planning-label,
+.creative-journey-quote blockquote {
+  font-family: var(--font-barlow-condensed), "Arial Narrow", Arial, sans-serif;
+  font-style: normal;
+}
+
+.portfolio-shell {
+  background-color: var(--lego-paper-soft);
+  background-image:
+    linear-gradient(rgba(0, 79, 158, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 79, 158, 0.045) 1px, transparent 1px);
+}
+
+.about-section,
+.academic-section,
+.career-journey-section,
+.communication-engagement-section {
+  color: var(--lego-ink);
+  background-color: var(--lego-paper);
+  background-image:
+    linear-gradient(rgba(0, 79, 158, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 79, 158, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, var(--lego-paper) 0%, var(--lego-paper-soft) 100%);
+}
+
+.about-heading,
+.academic-timeline-header h2,
+.academic-entry-copy h3,
+.career-journey-heading h2,
+.career-journey-title-link {
+  color: var(--lego-blue-deep);
+}
+
+.about-kicker,
+.academic-timeline-header p,
+.academic-entry-context,
+.career-journey-heading p,
+.career-journey-index,
+.career-journey-index svg {
+  color: var(--lego-red);
+}
+
+.about-body,
+.academic-timeline-header span,
+.academic-entry-body,
+.career-journey-heading span,
+.career-journey-body,
+.career-journey-highlights dd {
+  color: #374151;
+}
+
+.about-photo-frame {
+  color: #ffffff;
+  background: var(--lego-blue);
+  border-color: rgba(255, 255, 255, 0.64);
+}
+
+.about-photo-frame figcaption {
+  color: #ffffff;
+}
+
+.academic-entry-card,
+.academic-gpa-note,
+.career-layout-grid,
+.career-layout-card,
+.static-container-scroll-card {
+  background-color: #ffffff;
+  border-color: rgba(0, 79, 158, 0.16);
+}
+
+.academic-entry-highlight {
+  color: var(--lego-ink);
+  background: rgba(255, 213, 0, 0.56);
+  border-color: rgba(181, 22, 27, 0.24);
+}
+
+.academic-gpa-note::after {
+  border-color: var(--lego-red);
+}
+
+.academic-gpa-note span {
+  color: var(--lego-blue-deep);
+}
+
+.academic-gpa-note small {
+  color: var(--lego-red);
+}
+
+.academic-projects-section {
+  color: #ffffff;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 82% 18%, rgba(255, 213, 0, 0.2), transparent 32%),
+    var(--lego-blue);
+}
+
+.values-section {
+  color: #ffffff;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 82% 18%, rgba(255, 213, 0, 0.22), transparent 32%),
+    var(--lego-red);
+}
+
+.values-cloud,
+.values-quote,
+.values-word,
+.academic-projects-heading h2,
+.academic-projects-heading span {
+  color: #ffffff;
+}
+
+.values-word::after,
+.academic-projects-heading p {
+  color: var(--lego-yellow);
+}
+
+.values-section::before,
+.academic-projects-section::before {
+  background:
+    linear-gradient(135deg, var(--lego-yellow) 12px, transparent 0) 0 0 / 24px 18px,
+    linear-gradient(225deg, var(--lego-yellow) 12px, transparent 0) 0 0 / 24px 18px;
+}
+
+.academic-projects-carousel [class*="bg-[#fff7e8]"],
+.academic-projects-carousel button {
+  background-color: var(--lego-yellow);
+  color: var(--lego-blue-deep);
+}
+
+.career-journey-section::before {
+  background:
+    linear-gradient(135deg, var(--lego-red) 12px, transparent 0) 0 0 / 24px 18px,
+    linear-gradient(225deg, var(--lego-red) 12px, transparent 0) 0 0 / 24px 18px;
+}
+
+.career-journey-role {
+  color: var(--lego-blue-deep);
+  border-left-color: var(--lego-red);
+}
+
+.career-journey-highlights {
+  border-top-color: rgba(0, 155, 77, 0.48);
+}
+
+.career-journey-highlights dt,
+.career-video-heading p {
+  color: var(--lego-green);
+}
+
+.communication-title-band,
+.planning-title-band,
+.creative-planning-title-band {
+  background: var(--lego-yellow);
+}
+
+.communication-title-band h2,
+.planning-title-band h2,
+.creative-planning-title-band h2 {
+  color: var(--lego-blue-deep);
+}
+
+.communication-pillars p,
+.communication-gpa-strip span {
+  color: var(--lego-blue-deep);
+}
+
+.communication-gpa-strip {
+  background: var(--lego-yellow);
+}
+
+.planning-coordination-section {
+  color: var(--lego-ink);
+  background: var(--lego-yellow);
+}
+
+.planning-board {
+  background-color: var(--lego-yellow);
+}
+
+.planning-label,
+.planning-gantt-card,
+.planning-mini-card,
+.planning-rundown-card {
+  color: var(--lego-ink);
+  background-color: #ffffff;
+}
+
+.planning-mini-card {
+  border-color: var(--lego-blue-deep);
+}
+
+.planning-mini-header {
+  background: var(--lego-red);
+}
+
+.planning-mini-grid span:nth-child(3n + 1) {
+  background: var(--lego-green);
+}
+
+.planning-mini-grid span:nth-child(4n + 2) {
+  background: var(--lego-blue);
+}
+
+.planning-mini-grid span:nth-child(5n) {
+  background: var(--lego-red);
+}
+
+.planning-mini-grid span:nth-child(6n),
+.planning-bar {
+  background: var(--lego-yellow);
+}
+
+.creative-planning-section {
+  color: #ffffff;
+  background: var(--lego-green);
+}
+
+.creative-planning-label {
+  color: var(--lego-blue-deep);
+  background: #ffffff;
+}
+
+.creative-journey-quote {
+  background-color: #f8f8f5;
+  background-image: url("/assets/portfolio/creative-journey-lego-frame.png");
+}
+
+.creative-journey-quote blockquote {
+  color: var(--lego-blue-deep);
+  font-weight: 700;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.94);
+}
+
+.lego-intro-overlay,
+.lego-intro-scene,
+.lego-intro-loading {
+  background-color: var(--lego-yellow);
+}
+
+.lego-intro-heading {
+  color: var(--lego-red);
+  font-family: var(--font-barlow-condensed), "Arial Narrow", Arial, sans-serif;
+}
+
+.lego-intro-name,
+.lego-intro-role,
+.lego-hero-wordmark-link::after,
+.lego-hero-cta-link {
+  font-family: var(--font-barlow-condensed), "Arial Narrow", Arial, sans-serif;
+}
+
+/* Use the same LEGO brick row at every top-level section transition. */
+.portfolio-shell > section:not(.landing-poster-hero) {
+  position: relative;
+}
+
+.portfolio-shell > section:not(.landing-poster-hero)::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  height: 36px;
+  pointer-events: none;
+  content: "";
+  background-image: url("/assets/portfolio/about-lego-divider.png");
+  background-repeat: repeat-x;
+  background-position: center top;
+  background-size: auto 36px;
 }

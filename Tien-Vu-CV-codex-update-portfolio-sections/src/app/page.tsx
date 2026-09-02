@@ -92,11 +92,11 @@ export default function Home() {
               fill
               priority
               sizes="100vw"
-              src="/assets/portfolio/lego-hero-tien-vu.png"
+              src="/assets/portfolio/lego-hero-tien-vu-v2.png"
             />
 
             <h1 className="sr-only" id="hero-heading">
-              Tien Vu — Marketing, Public Relations and Content
+              Tien Vu — Video Editing, Content Creation and Visual Storytelling
             </h1>
             <p className="sr-only">
               I turn ideas into stories people want to be part of.
@@ -141,31 +141,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="values-section" aria-label="Creative values">
-          <div className="values-cloud">
-            <p className="values-quote">
-              “Creating with
-              <br />
-              <em>purpose.</em>
-              <br />
-              Communicating
-              <br />
-              with <em>impact.</em>”
-            </p>
-            {valueWords.map((word) => (
-              <button
-                aria-label={`${word.text}: ${word.description}`}
-                className={`values-word ${word.className}`}
-                data-description={word.description}
-                key={word.text}
-                type="button"
-              >
-                {word.text}
-              </button>
-            ))}
-          </div>
-        </section>
-
         <section className="about-section" id="about-me" aria-labelledby="about-heading">
           <div className="about-inner">
             <div className="about-copy">
@@ -175,50 +150,21 @@ export default function Home() {
               </h2>
               <div className="about-body">
                 <p>
-                  I&apos;m a content creator and aspiring marketing professional
-                  based in Melbourne.
-                </p>
-                <p>
-                  I believe effective marketing starts with understanding
-                  people. That&apos;s why I&apos;m passionate about creating
-                  authentic stories, engaging digital experiences, and campaigns
-                  that build meaningful connections.
-                </p>
-                <p>
-                  I love finding simple ideas that make a real impact. I&apos;m
-                  always eager to learn, collaborate, and create work that is
-                  both creative and purposeful.
+                  I&apos;m a Melbourne-based content creator and video editor
+                  passionate about turning ideas and everyday moments into
+                  engaging visual stories. I enjoy creating playful,
+                  human-centred content across education, social media and
+                  community projects.
                 </p>
               </div>
               <div className="about-tags" aria-label="Tien Vu focus areas">
-                <span className="about-lego-tag about-lego-tag-wide">
-                  <Image
-                    alt=""
-                    className="about-lego-tag-art"
-                    fill
-                    sizes="(max-width: 640px) 58vw, 270px"
-                    src="/assets/portfolio/about-lego-brick-red.png"
-                  />
+                <span className="about-lego-tag about-lego-tag-red">
                   <span className="about-lego-tag-label">Content Creator</span>
                 </span>
-                <span className="about-lego-tag">
-                  <Image
-                    alt=""
-                    className="about-lego-tag-art"
-                    fill
-                    sizes="(max-width: 640px) 45vw, 220px"
-                    src="/assets/portfolio/about-lego-brick-yellow.png"
-                  />
+                <span className="about-lego-tag about-lego-tag-yellow">
                   <span className="about-lego-tag-label">Marketing</span>
                 </span>
-                <span className="about-lego-tag">
-                  <Image
-                    alt=""
-                    className="about-lego-tag-art"
-                    fill
-                    sizes="(max-width: 640px) 45vw, 220px"
-                    src="/assets/portfolio/about-lego-brick-blue.png"
-                  />
+                <span className="about-lego-tag about-lego-tag-blue">
                   <span className="about-lego-tag-label">Melbourne</span>
                 </span>
               </div>
@@ -248,11 +194,36 @@ export default function Home() {
           </div>
         </section>
 
+        <CareerJourney />
+
         <AcademicJourney />
 
         <AcademicProjects />
 
-        <CareerJourney />
+        <section className="values-section" aria-label="Creative values">
+          <div className="values-cloud">
+            <p className="values-quote">
+              “Creating with
+              <br />
+              <em>purpose.</em>
+              <br />
+              Communicating
+              <br />
+              with <em>impact.</em>”
+            </p>
+            {valueWords.map((word) => (
+              <button
+                aria-label={`${word.text}: ${word.description}`}
+                className={`values-word ${word.className}`}
+                data-description={word.description}
+                key={word.text}
+                type="button"
+              >
+                {word.text}
+              </button>
+            ))}
+          </div>
+        </section>
 
         <CommunicationEngagement />
 

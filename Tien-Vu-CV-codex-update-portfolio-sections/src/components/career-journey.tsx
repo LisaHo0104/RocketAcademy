@@ -22,15 +22,33 @@ function CareerJourneyCopy({
         <HeartHandshake aria-hidden="true" />
         Project {String(index + 1).padStart(2, "0")}
       </p>
-      <a
-        className="career-journey-title-link"
-        href={project.href}
-        rel="noreferrer"
-        target="_blank"
-      >
-        {project.title}
-        <ExternalLink aria-hidden="true" />
-      </a>
+      <div className="career-journey-title-row">
+        <a
+          className="career-journey-title-link"
+          href={project.href}
+          rel="noreferrer"
+          target="_blank"
+        >
+          {project.title}
+          <ExternalLink aria-hidden="true" />
+        </a>
+        {project.projectHref && project.projectTitle ? (
+          <>
+            <span className="career-journey-title-separator" aria-hidden="true">
+              –
+            </span>
+            <a
+              className="career-journey-title-link career-journey-project-link"
+              href={project.projectHref}
+              rel="noreferrer"
+              target="_blank"
+            >
+              {project.projectTitle}
+              <ExternalLink aria-hidden="true" />
+            </a>
+          </>
+        ) : null}
+      </div>
       <p className="career-journey-role">
         {project.role}
         <span>{project.period}</span>
@@ -152,8 +170,8 @@ export function CareerJourney() {
           <p>My Career Journey</p>
           <h2 id="career-journey-heading">My Career Journey</h2>
           <span>
-            The first place where communication became more than coursework:
-            a way to connect people around shared care, action, and impact.
+            A journey through child-focused storytelling, video production,
+            social content, and creative work that connects with people.
           </span>
         </div>
 

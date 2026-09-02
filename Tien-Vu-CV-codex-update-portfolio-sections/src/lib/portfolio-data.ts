@@ -49,6 +49,8 @@ export type CareerJourneyProject = {
   role: string;
   summary: string[];
   title: string;
+  projectHref?: string;
+  projectTitle?: string;
   video?: {
     alt: string;
     caption: string;
@@ -196,6 +198,31 @@ export const academicProjects = [
 
 export const careerJourneyProjects = [
   {
+    title: "Education Network Group Pty Ltd",
+    href: "https://www.educationnetworkgroup.com/",
+    projectTitle: "WhizKid Games Project",
+    projectHref: "https://www.autismgames.com.au/",
+    role: "Social Marketing Intern",
+    period: "Present",
+    highlights: [
+      {
+        value: "Play",
+        label: "child-focused educational content",
+      },
+      {
+        value: "Visuals",
+        label: "visual storytelling and animation",
+      },
+      {
+        value: "Children",
+        label: "accessible content for children and their families",
+      },
+    ],
+    summary: [
+      "Working on the WhizKid Games project has given me the opportunity to create content where play, learning, and visual storytelling come together. I develop child-focused digital content through illustration, animation, social media, and creative concepts designed to make learning feel engaging and accessible. This experience has also strengthened my ability to think beyond individual visuals and consider how pacing, movement, and storytelling can turn educational ideas into content that connects with both children and their families.",
+    ],
+  },
+  {
     title: "Hope Volunteer Club",
     href: "https://www.facebook.com/tinhnguyenhope.hcm",
     role: "Media & PR Member",
@@ -215,9 +242,7 @@ export const careerJourneyProjects = [
       },
     ],
     summary: [
-      "My journey didn't begin with a business; it began with a community. Joining Hope Volunteer Club gave me the opportunity to contribute from idea to execution, from brainstorming fundraising campaigns and creating communication content to promoting volunteer events and working closely with team members and community partners.",
-      "Watching our campaigns raise 250 million VND and increase social media engagement by 34.4% taught me that thoughtful communication has the power to inspire action, strengthen communities, and create meaningful impact beyond business.",
-      "More importantly, it was where I first discovered that the most rewarding part of communication is connecting people with a shared purpose.",
+      "Hope Volunteer Club was where I first discovered how visual storytelling could create an emotional connection with an audience. I created photo, video, and social content around volunteer activities, fundraising campaigns, and events involving children and local communities. It taught me to capture real moments with sensitivity and turn them into stories that encourage people to care, engage, and take action.",
     ],
     media: [
       {
@@ -307,7 +332,7 @@ export const careerJourneyProjects = [
   {
     title: "Swinburne Vietnam - HCMC",
     href: "https://www.facebook.com/SwinburneHCM",
-    role: "VJ / Content Creator / Editor",
+    role: "VJ / Content Creator / Video Editor",
     period: "May 2024 - April 2025",
     highlights: [
       {
@@ -324,7 +349,7 @@ export const careerJourneyProjects = [
       },
     ],
     summary: [
-      "Sometimes the best opportunities begin in familiar places. Returning to Swinburne Vietnam as a VJ and Content Creator allowed me to tell authentic student stories while developing my skills in digital storytelling, video production and audience engagement. Whether I was interviewing students, presenting on camera, filming campus events or editing videos, I learned that every piece of content represents a brand's voice. This experience taught me how authenticity, creativity and clear communication work together to build trust and meaningful audience connections.",
+      "Swinburne Vietnam was where I developed my hands-on experience in video production and editing. From interviewing students and presenting on camera to filming events and editing social content, I worked across the full creative process from idea to final video. Using Adobe Premiere Pro and CapCut, I learned how shot selection, pacing, audio, captions, and visual rhythm can turn everyday moments into engaging stories that feel authentic to the audience.",
     ],
     media: [
       {
@@ -398,8 +423,7 @@ export const careerJourneyProjects = [
       },
     ],
     summary: [
-      "Stepping into XOCOATI Saigon marked my first experience in commercial marketing. Working with a lifestyle and F&B brand showed me how creativity, strategy and data come together to support business goals. From planning content and writing copy to designing promotional materials and supporting campaign execution, I contributed to initiatives that grew social media followers from 5,000 to 7,200, increased workshop bookings by 20%, and achieved a 40% increase in campaign reach.",
-      "More than the numbers, this experience helped me understand that successful marketing isn't just about creating attractive content - it's about delivering the right message to the right audience with a clear purpose.",
+      "At XOCOATI Saigon, I explored how visual content can shape a lifestyle brand's personality. I supported content from planning and filming through to editing and publishing across social media, creating short-form content around workshops, products, and seasonal campaigns. The experience taught me to balance creative storytelling with a clear purpose — making content visually engaging while still supporting audience growth and business goals.",
     ],
     media: [
       {
@@ -475,7 +499,7 @@ export const careerJourneyProjects = [
     ],
   },
   {
-    title: "Personal TikTok Channel",
+    title: "Personal TikTok",
     href: projectLinks.personalTikTok,
     role: "Content Creator",
     period: "Present",
@@ -494,8 +518,7 @@ export const careerJourneyProjects = [
       },
     ],
     summary: [
-      "I believe the best way to learn marketing is by becoming a creator myself. Through my personal TikTok channel, I am building my own brand by creating lifestyle content that showcases Melbourne through the eyes of an international student.",
-      "The channel serves as a creative space where I continuously test content strategies, analyse audience engagement, and develop my storytelling and personal branding skills.",
+      "My personal TikTok is my space to experiment with short-form video storytelling. I film and edit lifestyle content around Melbourne, testing different hooks, pacing, music, captions, and visual styles to understand what keeps an audience watching. Creating for my own channel has given me the freedom to continuously experiment, learn from audience response, and develop a more distinctive editing style.",
     ],
     media: [
       {
@@ -514,6 +537,20 @@ export const careerJourneyProjects = [
     ],
   },
 ] satisfies CareerJourneyProject[];
+
+const careerJourneyOrder = [
+  "Education Network Group Pty Ltd",
+  "Swinburne Vietnam - HCMC",
+  "XOCOATI Saigon",
+  "Hope Volunteer Club",
+  "Personal TikTok",
+];
+
+careerJourneyProjects.sort(
+  (first, second) =>
+    careerJourneyOrder.indexOf(first.title) -
+    careerJourneyOrder.indexOf(second.title),
+);
 
 export const skillGroups = [
   {

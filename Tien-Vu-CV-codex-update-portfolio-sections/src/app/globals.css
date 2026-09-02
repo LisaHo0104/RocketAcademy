@@ -936,25 +936,50 @@
 .about-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  align-items: flex-end;
+  gap: 12px;
   margin-top: 34px;
 }
 
-.about-tags span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 34px;
-  padding: 0 13px;
-  color: #4d3028;
+.about-lego-tag {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 clamp(165px, 13.5vw, 190px);
+  aspect-ratio: 2.12;
+  filter: drop-shadow(0 9px 7px rgba(77, 48, 40, 0.2));
+}
+
+.about-lego-tag-wide {
+  flex-basis: clamp(210px, 17vw, 240px);
+  aspect-ratio: 2.28;
+}
+
+.about-lego-tag-art {
+  object-fit: contain;
+}
+
+.about-lego-tag-label {
+  position: absolute;
+  z-index: 1;
+  top: 69%;
+  right: 12%;
+  left: 12%;
+  color: #fff8e8;
   font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: clamp(10px, 0.9vw, 13px);
+  font-weight: 900;
   line-height: 1;
+  text-align: center;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  background: rgba(143, 150, 128, 0.18);
-  border: 1px solid rgba(77, 48, 40, 0.22);
-  border-radius: 999px;
+  letter-spacing: 0.09em;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.42);
+  white-space: nowrap;
+  transform: translateY(-50%);
+}
+
+.about-lego-tag:nth-child(2) .about-lego-tag-label {
+  color: #211b17;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 .about-comet-card {
@@ -1012,9 +1037,20 @@
     font-size: clamp(54px, 16vw, 76px);
   }
 
-  .about-tags span {
-    min-height: 31px;
-    font-size: 10px;
+  .about-tags {
+    gap: 8px;
+  }
+
+  .about-lego-tag {
+    flex-basis: min(44vw, 174px);
+  }
+
+  .about-lego-tag-wide {
+    flex-basis: min(56vw, 216px);
+  }
+
+  .about-lego-tag-label {
+    font-size: clamp(8px, 2.5vw, 11px);
   }
 }
 
@@ -4662,4 +4698,247 @@
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* LEGO artwork hero */
+
+.landing-poster-hero {
+  min-height: 0;
+  background: #f2e7d6;
+}
+
+.landing-poster-hero::after {
+  display: none;
+}
+
+.landing-poster-hero .hero-canvas {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1672 / 941;
+}
+
+.lego-hero-art {
+  object-fit: contain;
+  object-position: center;
+}
+
+.lego-hero-photo-strip {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.lego-hero-photo {
+  position: absolute;
+  left: 82.42%;
+  width: 10.74%;
+  overflow: hidden;
+  background: #ead8b9;
+}
+
+.lego-hero-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lego-hero-photo-camera-setup {
+  top: 18.42%;
+  height: 13.72%;
+}
+
+.lego-hero-photo-camera-setup img {
+  object-position: 50% 53%;
+}
+
+.lego-hero-photo-camera-portrait {
+  top: 33.05%;
+  height: 13.52%;
+}
+
+.lego-hero-photo-camera-portrait img {
+  object-fit: cover;
+  object-position: center 58%;
+}
+
+.lego-hero-photo-swinburne-award {
+  top: 47.29%;
+  height: 13.62%;
+}
+
+.lego-hero-photo-swinburne-award img,
+.lego-hero-photo-tet-am-team img {
+  object-position: center;
+}
+
+.lego-hero-photo-tet-am-team {
+  top: 62.17%;
+  height: 13.83%;
+}
+
+.lego-hero-nav {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.lego-hero-wordmark-link,
+.lego-hero-nav-links a,
+.lego-hero-cta-link {
+  position: absolute;
+  display: block;
+  pointer-events: auto;
+  border-radius: 4px;
+  outline: none;
+}
+
+.lego-hero-wordmark-link {
+  top: 3.1%;
+  left: 4.1%;
+  width: 13.2%;
+  height: 7.8%;
+}
+
+.lego-hero-nav-links {
+  position: absolute;
+  top: 3.3%;
+  right: 3.7%;
+  display: grid;
+  width: 39.7%;
+  height: 8.2%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3.5%;
+}
+
+.lego-hero-nav-links a {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.lego-hero-cta-link {
+  bottom: 8.8%;
+  left: 4.2%;
+  width: 32.6%;
+  height: 10.8%;
+}
+
+.lego-hero-wordmark-link:hover,
+.lego-hero-nav-links a:hover,
+.lego-hero-cta-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.72);
+}
+
+.lego-hero-wordmark-link:focus-visible,
+.lego-hero-nav-links a:focus-visible,
+.lego-hero-cta-link:focus-visible {
+  outline: 5px solid #fff;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 9px #d62828;
+}
+
+@media (max-width: 760px) {
+  .landing-poster-hero .hero-canvas {
+    height: calc(100vw * 941 / 1672 + 112px);
+    min-height: 0;
+    aspect-ratio: auto;
+    background: #fcbf49;
+  }
+
+  .lego-hero-art {
+    top: 0 !important;
+    bottom: auto !important;
+    height: calc(100vw * 941 / 1672) !important;
+    object-fit: contain;
+    object-position: center top;
+  }
+
+  .lego-hero-photo-strip {
+    bottom: auto;
+    height: calc(100vw * 941 / 1672);
+  }
+
+  .lego-hero-nav {
+    top: 12px;
+    right: 12px;
+    bottom: auto;
+    left: 12px;
+    display: flex;
+    min-height: 54px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 10px;
+    background: #111014;
+    border: 3px solid #fff;
+    box-shadow: 5px 6px 0 #d62828;
+  }
+
+  .lego-hero-wordmark-link {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: auto;
+    color: #fcbf49;
+  }
+
+  .lego-hero-wordmark-link::after {
+    content: "TIEN VU";
+    font-family: Impact, "Arial Black", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+  }
+
+  .lego-hero-nav-links {
+    position: relative;
+    inset: auto;
+    display: flex;
+    width: auto;
+    height: auto;
+    gap: 7px;
+  }
+
+  .lego-hero-nav-links a {
+    width: auto;
+    height: auto;
+    padding: 6px 5px;
+    color: white;
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lego-hero-nav-links a::after {
+    content: attr(aria-label);
+  }
+
+  .lego-hero-cta-link {
+    right: 18px;
+    bottom: 26px;
+    left: 18px;
+    display: grid;
+    width: auto;
+    height: 64px;
+    color: white;
+    place-items: center;
+    font-family: Impact, "Arial Black", sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: #d62828;
+    border: 4px solid #111014;
+    box-shadow: 7px 8px 0 #fcbf49;
+  }
+
+  .lego-hero-cta-link::after {
+    content: "EXPLORE SELECTED WORK  →";
+  }
 }

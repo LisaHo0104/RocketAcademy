@@ -52,72 +52,92 @@ const valueWords = [
   },
 ];
 
+const heroPhotos = [
+  {
+    className: "lego-hero-photo-camera-setup",
+    height: 683,
+    src: "/assets/portfolio/hero-photo-camera-setup.png",
+    width: 384,
+  },
+  {
+    className: "lego-hero-photo-camera-portrait",
+    height: 1138,
+    src: "/assets/portfolio/hero-photo-laptop-study.png",
+    width: 640,
+  },
+  {
+    className: "lego-hero-photo-swinburne-award",
+    height: 262,
+    src: "/assets/portfolio/hero-photo-swinburne-award.png",
+    width: 384,
+  },
+  {
+    className: "lego-hero-photo-tet-am-team",
+    height: 288,
+    src: "/assets/portfolio/hero-photo-tet-am-team.png",
+    width: 384,
+  },
+];
+
 export default function Home() {
   return (
     <>
       <IntroGate />
       <main className="portfolio-shell overflow-hidden">
         <section className="landing-poster-hero" aria-labelledby="hero-heading">
-          <nav className="hero-nav" aria-label="Portfolio navigation">
-            <a className="hero-wordmark" href="#top" aria-label="Tien Vu — back to top">
-              TIEN VU
-            </a>
-            <div className="hero-nav-links">
-              <a href="#about-me">About</a>
-              <a href="#projects">Work</a>
-              <a href="#career-journey">Journey</a>
-              <a href="#contact">Contact</a>
-            </div>
-          </nav>
-
           <div className="hero-canvas" id="top">
-            <h1 className="hero-name" id="hero-heading" aria-label="Tien Vu">
-              <span className="hero-name-tien">TIEN</span>
-              <span className="hero-name-vu">VU</span>
+            <Image
+              alt=""
+              className="lego-hero-art"
+              fill
+              priority
+              sizes="100vw"
+              src="/assets/portfolio/lego-hero-tien-vu.png"
+            />
+
+            <h1 className="sr-only" id="hero-heading">
+              Tien Vu — Marketing, Public Relations and Content
             </h1>
-
-            <div className="hero-portrait" aria-hidden="true">
-              <Image
-                alt=""
-                fill
-                priority
-                sizes="(max-width: 760px) 72vw, 42vw"
-                src="/assets/portfolio/01-3f13db76583904558f599e31d592f75d.png"
-              />
-            </div>
-
-            <div className="hero-intro">
-              <p className="hero-disciplines">Marketing · Public Relations · Content</p>
-              <p className="hero-statement">
-                I turn ideas into stories<br />people want to be part of.
-              </p>
-              <a className="hero-cta" href="#projects">
-                <span>Explore selected work</span>
-                <svg aria-hidden="true" viewBox="0 0 48 18">
-                  <path d="M1 9h43M36 2l8 7-8 7" />
-                </svg>
-              </a>
-            </div>
-
-            <p className="hero-note">
-              curious by nature,<br />thoughtful by design.
+            <p className="sr-only">
+              I turn ideas into stories people want to be part of.
             </p>
 
-            <div className="hero-contact-sheet" aria-hidden="true">
-              <span className="hero-tape" />
-              {[
-                ["/assets/portfolio/communication-camera-setup.jpg", "A camera setup"],
-                ["/assets/portfolio/02-b359602793bc1f8ac986f2fd920b5133.png", "Tien taking a photo"],
-                ["/assets/portfolio/05-c962811ebeb9a1addf8088e950abb909.png", "Tien holding a Swinburne certificate"],
-                ["/assets/portfolio/hero-contact-tet-am-team-v2.png", "Tien with the Tết Ấm volunteer team"],
-              ].map(([src, alt]) => (
-                <div className="hero-contact-frame" key={src}>
-                  <Image alt={alt} fill sizes="12vw" src={src} />
+            <div aria-hidden="true" className="lego-hero-photo-strip">
+              {heroPhotos.map((photo) => (
+                <div
+                  className={`lego-hero-photo ${photo.className}`}
+                  key={photo.src}
+                >
+                  <Image
+                    alt=""
+                    height={photo.height}
+                    sizes="11vw"
+                    src={photo.src}
+                    width={photo.width}
+                  />
                 </div>
               ))}
             </div>
 
-            <p className="hero-edition">Portfolio 2026</p>
+            <nav className="lego-hero-nav" aria-label="Portfolio navigation">
+              <a
+                aria-label="Tien Vu — back to top"
+                className="lego-hero-wordmark-link"
+                href="#top"
+              />
+              <div className="lego-hero-nav-links">
+                <a aria-label="About" href="#about-me" />
+                <a aria-label="Work" href="#projects" />
+                <a aria-label="Journey" href="#career-journey" />
+                <a aria-label="Contact" href="#contact" />
+              </div>
+            </nav>
+
+            <a
+              aria-label="Explore selected work"
+              className="lego-hero-cta-link"
+              href="#projects"
+            />
           </div>
         </section>
 
@@ -171,9 +191,36 @@ export default function Home() {
                 </p>
               </div>
               <div className="about-tags" aria-label="Tien Vu focus areas">
-                <span>Content Creator</span>
-                <span>Marketing</span>
-                <span>Melbourne</span>
+                <span className="about-lego-tag about-lego-tag-wide">
+                  <Image
+                    alt=""
+                    className="about-lego-tag-art"
+                    fill
+                    sizes="(max-width: 640px) 58vw, 270px"
+                    src="/assets/portfolio/about-lego-brick-red.png"
+                  />
+                  <span className="about-lego-tag-label">Content Creator</span>
+                </span>
+                <span className="about-lego-tag">
+                  <Image
+                    alt=""
+                    className="about-lego-tag-art"
+                    fill
+                    sizes="(max-width: 640px) 45vw, 220px"
+                    src="/assets/portfolio/about-lego-brick-yellow.png"
+                  />
+                  <span className="about-lego-tag-label">Marketing</span>
+                </span>
+                <span className="about-lego-tag">
+                  <Image
+                    alt=""
+                    className="about-lego-tag-art"
+                    fill
+                    sizes="(max-width: 640px) 45vw, 220px"
+                    src="/assets/portfolio/about-lego-brick-blue.png"
+                  />
+                  <span className="about-lego-tag-label">Melbourne</span>
+                </span>
               </div>
             </div>
 

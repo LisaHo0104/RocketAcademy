@@ -1,0 +1,83 @@
+import { Suspense, useRef } from "react";
+import { Group, MathUtils } from "three";
+import { useFrame } from "@react-three/fiber";
+import type { AnimationHandle } from "@/hooks";
+import { Skills } from "@/features/skills";
+import { Contact } from "@/features/contact";
+import { WorkExperience } from "@/features/workExperience";
+import { WorkProjects } from "@/features/workProjects";
+import { AnimatedName, StaticNames, SectionHeaders } from "@/features/headings";
+import { Floor } from "./Floor";
+import { Walls } from "./Walls";
+import { Environment, type EnvironmentHandle } from "./Environment";
+
+const overlap = 0.25;
+const nameDuration = 0.75;
+const floorDuration = 0.65;
+const wallsDuration = 2.5;
+const skillsDuration = 2;
+const headersDuration = 0.75;
+const durations: [number, number, number, number, number] = [
+  nameDuration,
+  floorDuration,
+  wallsDuration,
+  headersDuration,
+  skillsDuration,
+];
+const { timings } = durations.reduce<{
+  timings: { min: number; max: number }[];
+  currentStart: number;
+}>(
+  (result, duration) => {
+    result.timings.push({ min: result.currentStart, max: result.currentStart + duration });
+    result.currentStart = result.currentStart + duration - overlap;
+    return result;
+  },
+  { timings: [], currentStart: 0 },
+);
+
+export const Scene = () => {
+  const acc = useRef(0);
+  const environment = useRef<EnvironmentHandle>(null);
+  const floor = useRef<AnimationHandle>(null!);
+  const headers = useRef<AnimationHandle>(null!);
+  const name = useRef<AnimationHandle>(null!);
+  const skills = useRef<AnimationHandle>(null!);
+  const walls = useRef<AnimationHandle>(null!);
+  const sections = useRef<Group>(null!);
+
+  useFrame((_, delta) => {
+    if (environment.current?.checkIsLoaded()) {
+      acc.current += delta;
+    }
+    name.current.animate(MathUtils.smootherstep(acc.current, timings[0].min, timings[0].max));
+    floor.current.animate(MathUtils.smootherstep(acc.current, timings[1].min, timings[1].max));
+    walls.current.animate(MathUtils.smootherstep(acc.current, timings[2].min, timings[2].max));
+    headers.current.animate(MathUtils.smootherstep(acc.current, timings[3].min, timings[3].max));
+    skills.current.animate(MathUtils.smootherstep(acc.current, timings[4].min, timings[4].max));
+    const isComplete = acc.current >= timings[4].max;
+    sections.current.visible = isComplete;
+    if (!document.body.classList.contains("show-interaction-area") && isComplete) {
+      // Delay until next frame for Safari
+      requestAnimationFrame(() => document.body.classList.add("show-interaction-area"));
+    }
+  });
+  return (
+    <>
+      <Suspense fallback={null}>
+        <Environment ref={environment} />
+      </Suspense>
+      <SectionHeaders ref={headers} />
+      <AnimatedName ref={name} />
+      <Skills ref={skills} />
+      <group ref={sections}>
+        <WorkExperience />
+        <WorkProjects />
+        <Contact />
+        <StaticNames />
+      </group>
+      <Walls ref={walls} />
+      <Floor ref={floor} />
+    </>
+  );
+};

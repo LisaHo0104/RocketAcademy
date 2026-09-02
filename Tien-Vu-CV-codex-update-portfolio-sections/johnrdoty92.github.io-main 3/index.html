@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Creating visually engaging interfaces for great user experience and user retention">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>John Doty - Full Stack Developer</title>
+    <style>
+      :root {
+        font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+        line-height: 1.5;
+        font-weight: 400;
+
+        color-scheme: light dark;
+        color: rgba(255, 255, 255, 0.87);
+
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        --border-radius: 3px;
+        --light: #eae2b7;
+        --focus: #fcbf49;
+        --primary: #f77f00;
+        --secondary: #d62828;
+        --dark: #003049;
+      }
+
+      html {
+        height: 100dvh;
+        overscroll-behavior: none;
+        overflow: hidden;
+        font-size: 100%;
+      }
+
+      body {
+        background-color: var(--dark);
+        transition: background-color 450ms ease;
+      }
+
+      canvas {
+        touch-action: none;
+      }
+
+      .skills {
+        background-color: var(--dark);
+      }
+
+      .contact {
+        background-color: var(--secondary);
+      }
+
+      .workExperience {
+        background-color: var(--focus);
+      }
+
+      .workProject {
+        background-color: var(--primary);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      #root {
+        height: 100%;
+      }
+
+      button {
+        border-radius: var(--border-radius);
+        border: none;
+        padding: 0.6em 1.2em;
+        line-height: 1;
+        font-size: 1.25em;
+        font-weight: 500;
+        font-family: monospace;
+        background-color: white;
+        text-transform: uppercase;
+        color: black;
+        cursor: pointer;
+        transition: background-color 100ms ease-in-out;
+        border-color: black;
+        border-width: 2px 4px 4px 2px;
+        border-style: solid;
+      }
+
+      button:hover {
+        background-color: var(--focus);
+      }
+
+      button:focus,
+      button:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      button:active {
+        background-color: var(--light);
+      }
+
+      a,
+      a:visited {
+        color: var(--primary);
+      }
+
+      a:hover {
+        color: var(--focus);
+      }
+
+      a:active {
+        color: var(--secondary);
+      }
+
+      dialog {
+        font-family: monospace;
+        padding: 1rem;
+        background-color: var(--dark);
+        border-radius: var(--border-radius);
+        border-color: white;
+        border-width: 1px 3px 3px 1px;
+        border-style: solid;
+        color: white;
+        position: absolute;
+        transition:
+          opacity 0.25s ease-in-out,
+          top 0.25s cubic-bezier(0.5, 0.74, 0.55, 0.97),
+          transform 0.25s cubic-bezier(0.5, 0.74, 0.55, 0.97);
+        opacity: 0;
+        top: 52.5%;
+        margin-inline: auto;
+        width: 100%;
+        max-width: 600px;
+        height: calc(50dvh - 1rem);
+      }
+
+      dialog.modal-visible {
+        opacity: 1;
+        top: 50%;
+      }
+
+      dialog::backdrop {
+        opacity: 0;
+      }
+
+      dialog button {
+        padding: 0.25em 0.5em;
+      }
+
+      dialog .dialog-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1em;
+      }
+
+      dialog h2 {
+        text-align: center;
+      }
+
+      dialog .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.2em;
+        margin-bottom: 1em;
+      }
+
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5em;
+      }
+
+      li::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background-color: var(--primary);
+        display: inline-block;
+        margin-right: 0.5em;
+      }
+
+      .company-logo {
+        display: flex;
+        justify-content: center;
+      }
+
+      .company-logo img {
+        min-width: 0;
+        max-width: 150px;
+        object-fit: contain;
+      }
+
+      .company {
+        display: flex;
+        gap: 0.5em;
+        justify-content: center;
+      }
+
+      .duration {
+        font-style: italic;
+        font-size: 0.75rem;
+        text-align: center;
+      }
+
+      .duration .delta {
+        color: var(--primary);
+      }
+
+      .interaction-area {
+        pointer-events: none;
+        position: absolute;
+        inset: 0;
+        padding: 0.25em 1em 3em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+        transition: opacity 250ms ease-in-out;
+        opacity: 0;
+      }
+
+      body.show-interaction-area .interaction-area {
+        opacity: 1;
+      }
+
+      .interaction-area :is(.search, button) {
+        pointer-events: all;
+      }
+
+      .search {
+        font-family: monospace;
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        width: 100%;
+        max-width: 450px;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        margin-bottom: auto;
+        padding: 0.5em 1em;
+        background-color: white;
+        transition: opacity 300ms ease;
+        opacity: 1;
+        border-color: black;
+        border-width: 2px 4px 4px 2px;
+        border-style: solid;
+        /* Force GPU for mobile devices */
+        transform: translateZ(0);
+      }
+
+      .search.hidden {
+        opacity: 0;
+      }
+
+      .search .icon {
+        fill: none;
+        stroke: var(--dark);
+      }
+
+      .search:focus-within {
+        background-color: var(--light);
+      }
+
+      .search input[type="text"] {
+        font-size: clamp(16px, 1rem, 24px);
+        font-family: inherit;
+        outline: none;
+        border: none;
+        background: none;
+        color: black;
+      }
+
+      .search input[type="text"]::placeholder {
+        font-family: monospace;
+        color: black;
+        opacity: 0.75;
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 1rem;
+        font-size: 0.875rem;
+        margin-inline: auto;
+        width: 100%;
+        max-width: 850px;
+      }
+
+      .actions button:disabled.download {
+        opacity: 0.5;
+      }
+
+      .download {
+        grid-column: span 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5em;
+      }
+
+      .download svg {
+        flex-shrink: 0;
+      }
+
+      .carousel-button {
+        width: fit-content;
+        border: none;
+        box-shadow: unset;
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 400;
+        grid-row: 1 / 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.6em 0.6em;
+      }
+
+      .carousel-button.left {
+        justify-self: start;
+      }
+
+      .carousel-button.right {
+        justify-self: end;
+      }
+
+      .carousel-button,
+      .carousel-button:hover,
+      .carousel-button:active,
+      .carousel-button:focus,
+      .carousel-button:focus-visible {
+        background-color: transparent;
+      }
+
+      .carousel-button:focus,
+      .carousel-button:focus-visible {
+        outline: unset;
+      }
+
+      .carousel-button svg {
+        background-color: black;
+        border-radius: 50%;
+        transition: background-color 100ms ease-in-out;
+        flex-shrink: 0;
+      }
+
+      .carousel-button:hover svg {
+        background-color: var(--primary);
+      }
+
+      .carousel-button:active svg {
+        background-color: var(--focus);
+        transition: none;
+      }
+
+      .carousel-button:focus svg {
+        outline: 3px solid var(--focus);
+        outline-offset: 2px;
+      }
+
+      .carousel-button p {
+        padding-inline: 0.6em;
+        font-weight: bold;
+        filter: drop-shadow(2.5px 2.5px black) drop-shadow(-0.5px -0.5px black);
+      }
+
+      .initials {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: clamp(50px, 50vw, 200px);
+        transition: opacity ease-out 250ms;
+        opacity: 1;
+      }
+
+      .initials.hidden {
+        opacity: 0;
+      }
+
+      .initials #wave path {
+        animation: logo-loader 4s ease-in-out infinite alternate;
+      }
+
+      .initials .background-letters {
+        fill: var(--focus);
+      }
+
+      .initials .foreground-letters {
+        fill: var(--secondary);
+      }
+
+      @keyframes logo-loader {
+        from {
+          transform: translate(-1000px, 0px);
+        }
+
+        to {
+          transform: translate(0px, -100px);
+        }
+      }
+
+      @media screen and (min-width: 600px) {
+        dialog {
+          top: 0%;
+          padding: 2em;
+          left: 50%;
+          transform: translateX(5%);
+          margin-block: auto;
+          margin-inline: unset;
+          margin-right: 1rem;
+          width: 50%;
+          height: fit-content;
+        }
+
+        dialog.modal-visible {
+          top: 0%;
+          transform: translateX(0%);
+        }
+
+        .interaction-area {
+          padding: 0.5em 1em 6em;
+        }
+
+        .actions {
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        }
+
+        .download {
+          grid-column: unset;
+        }
+
+        .carousel-button {
+          grid-row: unset;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNJ73P37"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <svg class="initials" viewBox="0 0 100 100">
+      <defs>
+        <text
+          id="letters"
+          x="50"
+          y="50"
+          font-size="100"
+          font-weight="bold"
+          text-anchor="middle"
+          dominant-baseline="middle"
+        >
+          jd
+        </text>
+        <clipPath id="wave">
+          <path
+            d="M0 201H5.3c5.4 0 16 0 26.9 0 10.8 0 21.8 0 32.6 0 10.9 0 21.5 0 32.2 0s21.3 0 32 0 21.3 0 32.2 0c10.8 0 21.8 0 32.6 0 10.9 0 21.5 0 32.2 0s21.3 0 32 0 21.3 0 32.2 0c10.8 0 21.8 0 32.6 0 10.9 0 21.5 0 32.2 0s21.3 0 32 0 21.3 0 32.2 0c10.8 0 21.8 0 32.6 0 10.9 0 21.5 0 32.2 0s21.3 0 32 0 21.3 0 32.2 0c10.8 0 21.8 0 32.6 0 10.9 0 21.5 0 32.2 0s21.3 0 32 0 21.3 0 32.2 0c10.8 0 21.8 0 32.6 0 10.9 0 21.5 0 32.2 0s21.3 0 32 0 21.3 0 32.2 0c10.8 0 21.8 0 32.6 0 10.9 0 21.5 0 32.2 0s21.3 0 32 0 21.3 0 32.2 0c10.8 0 21.8 0 32.6 0 10.9 0 21.5 0 26.9 0h5.3V116l-5.3-5.8c-5.4-5.9-16-17.5-26.9-21.5-10.8-4-21.8-.4-32.6.5-10.9.8-21.5-1.2-32.2-1.5-10.7-.4-21.3 1-32 3.8s-21.3 7.2-32.2 9.5c-10.8 2.3-21.8 2.7-32.6-.2C795.3 98 784.7 92 774 94s-21.3 12-32 14.5-21.3-2.5-32.2-5.8c-10.8-3.4-21.8-5-32.6-5.9-10.9-.8-21.5-.8-32.2 1.4-10.7 2.1-21.3 6.5-32 4.3s-21.3-10.8-32.2-15.2C570 83 559 83 548.2 87.3c-10.9 4.4-21.5 13-32.2 18.4-10.7 5.3-21.3 7.3-32 3.3s-21.3-14-32.2-16.5C441 90 430 95 419.2 96.5c-10.9 1.5-21.5-.5-32.2-1s-21.3.5-32-1.2c-10.7-1.6-21.3-6-32.2-6.8-10.8-.8-21.8 1.8-32.6 5.3-10.9 3.5-21.5 7.9-32.2 9-10.7 1.2-21.3-.8-32-3.1-10.7-2.4-21.3-5-32.2-3.9-10.8 1.2-21.8 6.2-32.6 8.9-10.9 2.6-21.5 3-32.2-.4C118.3 100 107.7 93 97 92s-21.3 4-32.2 6.7c-10.8 2.6-21.8 3-32.6 3.6-10.9.7-21.5 1.7-26.9 2.2L0 105Z"
+          />
+        </clipPath>
+      </defs>
+      <use class="background-letters" href="#letters" />
+      <use class="foreground-letters" href="#letters" clip-path="url(#wave)" />
+    </svg>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

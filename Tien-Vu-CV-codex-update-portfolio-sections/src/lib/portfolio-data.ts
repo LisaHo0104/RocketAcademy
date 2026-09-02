@@ -45,6 +45,7 @@ export type CareerJourneyProject = {
     value: string;
   }[];
   media?: CareerJourneyMedia[];
+  mediaVariant?: "portrait-grid";
   period: string;
   role: string;
   summary: string[];
@@ -220,6 +221,58 @@ export const careerJourneyProjects = [
     ],
     summary: [
       "Working on the WhizKid Games project has given me the opportunity to create content where play, learning, and visual storytelling come together. I develop child-focused digital content through illustration, animation, social media, and creative concepts designed to make learning feel engaging and accessible. This experience has also strengthened my ability to think beyond individual visuals and consider how pacing, movement, and storytelling can turn educational ideas into content that connects with both children and their families.",
+    ],
+    mediaVariant: "portrait-grid",
+    media: [
+      {
+        id: 1,
+        eyebrow: "Campaign visual",
+        title: "Every Milestone Matters",
+        description:
+          "A child-focused WhizKid Games visual celebrating progress through playful milestones and an encouraging rewards system.",
+        details: "WhizKid Games social content",
+        thumbnail: "/assets/portfolio/whizkid-every-milestone.png",
+        alt: "Every Milestone Matters WhizKid Games campaign visual",
+        className: "career-layout-card-full-image",
+        imageClassName: "career-layout-card-image-contain",
+      },
+      {
+        id: 2,
+        eyebrow: "Inclusive storytelling",
+        title: "Every Child Has Their Own Journey",
+        description:
+          "An inclusive campaign visual showing children with different backgrounds and abilities learning and playing together.",
+        details: "WhizKid Games social content",
+        thumbnail: "/assets/portfolio/whizkid-every-child.png",
+        alt: "Every Child Has Their Own Journey inclusive WhizKid Games visual",
+        className: "career-layout-card-full-image",
+        imageClassName: "career-layout-card-image-contain",
+      },
+      {
+        id: 3,
+        eyebrow: "Product storytelling",
+        title: "See Growth in Every Step",
+        description:
+          "A product-led visual introducing the progress dashboard and showing how families can follow a child's development over time.",
+        details: "WhizKid Games dashboard feature",
+        thumbnail: "/assets/portfolio/whizkid-growth-dashboard.png",
+        alt: "See Growth in Every Step WhizKid Games dashboard visual",
+        className: "career-layout-card-full-image",
+        imageClassName: "career-layout-card-image-contain",
+      },
+      {
+        id: 4,
+        eyebrow: "Social video",
+        title: "Florence the Frog",
+        description:
+          "A short social video introducing how Florence the Frog supports children as they build confidence with navigation.",
+        details: "WhizKid Games social video",
+        thumbnail:
+          "/assets/portfolio/whizkid-florence-the-frog-poster.jpg",
+        alt: "Florence the Frog WhizKid Games social video",
+        className: "career-layout-card-full-image",
+        videoSrc: "/assets/portfolio/whizkid-florence-the-frog.mp4",
+      },
     ],
   },
   {

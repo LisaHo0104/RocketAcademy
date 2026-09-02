@@ -24,9 +24,11 @@ export type LayoutGridCard = {
 export function LayoutGrid({
   cards,
   className,
+  variant,
 }: {
   cards: LayoutGridCard[];
   className?: string;
+  variant?: "portrait-grid";
 }) {
   const [selected, setSelected] = useState<LayoutGridCard | null>(null);
 
@@ -53,7 +55,12 @@ export function LayoutGrid({
 
   return (
     <div className={cn("career-layout-grid-wrap", className)}>
-      <div className="career-layout-grid">
+      <div
+        className={cn(
+          "career-layout-grid",
+          variant === "portrait-grid" && "career-layout-grid-portrait",
+        )}
+      >
         {cards.map((card, index) =>
           card.videoSrc ? (
             <figure

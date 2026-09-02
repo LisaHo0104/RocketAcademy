@@ -201,6 +201,7 @@ export function CareerJourney() {
                       <LayoutGrid
                         cards={project.media}
                         className="career-journey-media"
+                        variant={project.mediaVariant}
                       />
                     ) : null}
                     {project.video ? (

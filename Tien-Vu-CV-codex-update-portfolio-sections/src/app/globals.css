@@ -597,7 +597,7 @@
   font-size: 60px;
   font-weight: 300;
   line-height: 1.16;
-  letter-spacing: -0.018em;
+  letter-spacing: 0;
   text-align: center;
   transform: translate(-50%, -50%);
 }
@@ -2817,6 +2817,17 @@
   box-shadow: 0 18px 34px rgba(54, 35, 29, 0.12);
 }
 
+.career-layout-grid-portrait {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 920px;
+}
+
+.career-layout-grid-portrait .career-layout-card,
+.career-layout-grid-portrait .career-layout-card:first-child {
+  grid-column: auto;
+  aspect-ratio: 661 / 1435;
+}
+
 .career-layout-card {
   position: relative;
   aspect-ratio: 1206 / 1672;
@@ -3542,6 +3553,10 @@
   .career-layout-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 7px;
+  }
+
+  .career-layout-grid-portrait {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .career-swinburne-board {
@@ -5398,4 +5413,492 @@ select {
   background-repeat: repeat-x;
   background-position: center top;
   background-size: auto 36px;
+}
+
+/* Contact: a responsive LEGO baseplate built from real page elements. */
+.contact-section {
+  position: relative;
+  min-height: 100svh;
+  padding: clamp(96px, 10vw, 150px) clamp(22px, 6vw, 96px) 34px;
+  overflow: hidden;
+  color: #ffffff;
+  background-color: var(--lego-blue-deep);
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.12) 0 5px, transparent 5.5px),
+    linear-gradient(145deg, rgba(0, 109, 183, 0.92), rgba(0, 79, 158, 0.98));
+  background-position: 0 0, 0 0;
+  background-size: 34px 34px, 100% 100%;
+}
+
+.contact-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
+  gap: clamp(48px, 8vw, 138px);
+  align-items: center;
+  width: min(1480px, 100%);
+  margin: 0 auto;
+}
+
+.contact-copy {
+  max-width: 830px;
+}
+
+.contact-kicker {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 0 0 clamp(24px, 3vw, 44px);
+  color: var(--lego-yellow);
+  font-size: clamp(12px, 1vw, 15px);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.contact-kicker span {
+  position: relative;
+  width: 42px;
+  height: 14px;
+  background: var(--lego-red);
+  border-radius: 3px;
+  box-shadow: 0 4px 0 var(--lego-red-deep);
+}
+
+.contact-kicker span::before,
+.contact-kicker span::after {
+  position: absolute;
+  top: -5px;
+  width: 10px;
+  height: 6px;
+  content: "";
+  background: #ef3f45;
+  border-radius: 4px 4px 1px 1px;
+}
+
+.contact-kicker span::before {
+  left: 7px;
+}
+
+.contact-kicker span::after {
+  right: 7px;
+}
+
+.contact-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  font-family: var(--font-barlow-condensed), "Arial Narrow", Arial, sans-serif;
+  font-size: clamp(58px, 7.7vw, 132px);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.018em;
+  text-transform: uppercase;
+}
+
+.contact-heading span,
+.contact-heading strong,
+.contact-heading em {
+  display: block;
+}
+
+.contact-heading strong {
+  margin: 0.2em 0 0.18em;
+  padding: 0.03em 0.1em 0.09em;
+  color: var(--lego-blue-deep);
+  font-style: normal;
+  line-height: 0.84;
+  background: var(--lego-yellow);
+  box-shadow: 0.08em 0.08em 0 #d4a900;
+  transform: rotate(-1.1deg);
+}
+
+.contact-heading em {
+  margin-top: 0.26em;
+  color: var(--lego-yellow);
+  font-style: normal;
+}
+
+.contact-intro {
+  max-width: 590px;
+  margin: clamp(32px, 4vw, 52px) 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(16px, 1.4vw, 21px);
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.contact-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 760px;
+  margin-top: clamp(28px, 3vw, 44px);
+  font-style: normal;
+}
+
+.contact-action {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 20px;
+  gap: 14px;
+  align-items: center;
+  min-height: 84px;
+  padding: 14px 18px 12px 14px;
+  color: var(--lego-ink);
+  font-size: clamp(13px, 1vw, 16px);
+  font-weight: 900;
+  line-height: 1.15;
+  text-decoration: none;
+  background: #ffffff;
+  border: 3px solid var(--lego-ink);
+  border-radius: 8px;
+  box-shadow: 0 8px 0 rgba(14, 26, 49, 0.74);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.contact-action::before,
+.contact-action::after {
+  position: absolute;
+  top: -10px;
+  width: 24px;
+  height: 9px;
+  content: "";
+  background: inherit;
+  border: 3px solid var(--lego-ink);
+  border-bottom: 0;
+  border-radius: 7px 7px 0 0;
+}
+
+.contact-action::before {
+  left: 28px;
+}
+
+.contact-action::after {
+  right: 28px;
+}
+
+.contact-action:hover,
+.contact-action:focus-visible {
+  outline: none;
+  box-shadow: 0 4px 0 rgba(14, 26, 49, 0.74);
+  transform: translateY(4px);
+}
+
+.contact-action:focus-visible {
+  outline: 4px solid var(--lego-yellow);
+  outline-offset: 4px;
+}
+
+.contact-action small {
+  display: block;
+  margin-bottom: 5px;
+  color: #667085;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.contact-action-icon {
+  display: grid;
+  width: 48px;
+  aspect-ratio: 1;
+  place-items: center;
+  color: #ffffff;
+  background: var(--lego-red);
+  border: 2px solid var(--lego-ink);
+  border-radius: 50%;
+}
+
+.contact-action-phone .contact-action-icon {
+  background: var(--lego-green);
+}
+
+.contact-action-icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.contact-action-arrow {
+  width: 19px;
+  height: 19px;
+}
+
+.contact-portrait-wrap {
+  position: relative;
+  width: min(100%, 540px);
+  justify-self: center;
+  padding: clamp(20px, 2.5vw, 34px);
+  background: var(--lego-red);
+  border: clamp(7px, 0.7vw, 11px) solid var(--lego-ink);
+  border-radius: 18px;
+  box-shadow: 18px 20px 0 rgba(14, 26, 49, 0.78);
+  transform: rotate(1.5deg);
+}
+
+.contact-portrait-card {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 12px;
+  background: #ffffff;
+  border: 5px solid var(--lego-ink);
+  border-radius: 9px;
+}
+
+.contact-portrait-image {
+  position: relative;
+  aspect-ratio: 560 / 735;
+  overflow: hidden;
+  background: #e9e8df;
+  border: 3px solid var(--lego-ink);
+}
+
+.contact-portrait-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-portrait-card figcaption {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 4px 3px;
+  color: var(--lego-ink);
+  font-size: clamp(11px, 1vw, 14px);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.contact-status-dot {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  background: var(--lego-green);
+  border: 2px solid var(--lego-ink);
+  border-radius: 50%;
+}
+
+.contact-portrait-studs {
+  position: absolute;
+  inset: 8px 12px auto;
+  z-index: 3;
+  display: flex;
+  justify-content: space-around;
+  pointer-events: none;
+}
+
+.contact-portrait-studs span {
+  width: clamp(19px, 2vw, 28px);
+  height: clamp(11px, 1.2vw, 16px);
+  background: #ef3f45;
+  border: 3px solid var(--lego-ink);
+  border-bottom-width: 2px;
+  border-radius: 50% 50% 22% 22%;
+}
+
+.contact-mini-bricks {
+  position: absolute;
+  right: -38px;
+  bottom: -44px;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+}
+
+.contact-mini-bricks span {
+  display: block;
+  width: 48px;
+  height: 28px;
+  border: 4px solid var(--lego-ink);
+  border-radius: 4px;
+  box-shadow: inset 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.contact-mini-bricks span:nth-child(1) {
+  background: var(--lego-yellow);
+  transform: rotate(-7deg);
+}
+
+.contact-mini-bricks span:nth-child(2) {
+  background: var(--lego-green);
+  transform: translate(-4px, 11px) rotate(4deg);
+}
+
+.contact-mini-bricks span:nth-child(3) {
+  background: var(--lego-red);
+  transform: translate(-8px, -1px) rotate(-2deg);
+}
+
+.contact-floating-brick {
+  position: absolute;
+  z-index: 1;
+  width: 136px;
+  height: 54px;
+  opacity: 0.9;
+  border: 5px solid var(--lego-ink);
+  border-radius: 8px;
+}
+
+.contact-floating-brick::before,
+.contact-floating-brick::after {
+  position: absolute;
+  top: -16px;
+  width: 32px;
+  height: 14px;
+  content: "";
+  background: inherit;
+  border: 5px solid var(--lego-ink);
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+}
+
+.contact-floating-brick::before {
+  left: 19px;
+}
+
+.contact-floating-brick::after {
+  right: 19px;
+}
+
+.contact-floating-brick-red {
+  top: 17%;
+  right: -50px;
+  background: var(--lego-red);
+  transform: rotate(-13deg);
+}
+
+.contact-floating-brick-blue {
+  bottom: 18%;
+  left: -65px;
+  background: var(--lego-yellow);
+  transform: rotate(17deg);
+}
+
+.contact-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(1480px, 100%);
+  margin: clamp(80px, 10vw, 142px) auto 0;
+  padding-top: 22px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-top: 2px solid rgba(255, 255, 255, 0.22);
+}
+
+.contact-footer a {
+  color: var(--lego-yellow);
+  text-decoration: none;
+}
+
+@media (max-width: 980px) {
+  .contact-inner {
+    grid-template-columns: 1fr 0.78fr;
+    gap: 42px;
+  }
+
+  .contact-heading {
+    font-size: clamp(58px, 8.8vw, 90px);
+  }
+
+  .contact-actions {
+    grid-template-columns: 1fr;
+    max-width: 470px;
+  }
+}
+
+@media (max-width: 760px) {
+  .contact-section {
+    min-height: auto;
+    padding: 88px 20px 28px;
+    background-size: 28px 28px, 100% 100%;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+
+  .contact-heading {
+    font-size: clamp(52px, 16vw, 82px);
+    line-height: 0.92;
+    letter-spacing: 0.004em;
+  }
+
+  .contact-heading strong {
+    max-width: 100%;
+  }
+
+  .contact-intro {
+    margin-top: 34px;
+  }
+
+  .contact-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-action {
+    grid-template-columns: 44px minmax(0, 1fr) 18px;
+    min-height: 78px;
+    font-size: 13px;
+  }
+
+  .contact-action-icon {
+    width: 44px;
+  }
+
+  .contact-portrait-wrap {
+    width: min(90%, 480px);
+    box-shadow: 12px 14px 0 rgba(14, 26, 49, 0.78);
+    transform: rotate(0.8deg);
+  }
+
+  .contact-mini-bricks {
+    right: -24px;
+  }
+
+  .contact-floating-brick-red {
+    top: 48%;
+  }
+
+  .contact-footer {
+    margin-top: 90px;
+  }
+}
+
+@media (max-width: 430px) {
+  .contact-action {
+    gap: 10px;
+    padding-right: 12px;
+  }
+
+  .contact-action-arrow {
+    display: none;
+  }
+
+  .contact-footer {
+    gap: 18px;
+    align-items: flex-start;
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-action {
+    transition: none;
+  }
 }

@@ -4,6 +4,7 @@ import { AcademicJourney } from "@/components/academic-journey";
 import { AcademicProjects } from "@/components/academic-projects";
 import { CareerJourney } from "@/components/career-journey";
 import { CommunicationEngagement } from "@/components/communication-engagement";
+import { ContactSection } from "@/components/contact-section";
 import { CreativePlanning } from "@/components/creative-planning";
 import { IntroGate } from "@/components/intro-gate";
 import { PlanningCoordinationExecution } from "@/components/planning-coordination-execution";
@@ -244,16 +245,7 @@ export default function Home() {
           </blockquote>
         </section>
 
-        <section aria-label="Contact Tien Vu" id="contact">
-          <Image
-            alt="Let's create meaningful communication together — contact Jocasta Vu Tien by email or phone"
-            className="block h-auto w-full"
-            height={1138}
-            sizes="100vw"
-            src="/assets/portfolio/contact-lets-create-v2.png"
-            width={1898}
-          />
-        </section>
+        <ContactSection />
       </main>
     </>
   );

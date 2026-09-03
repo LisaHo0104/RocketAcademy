@@ -1,4 +1,4 @@
-import { ExternalLink, HeartHandshake } from "lucide-react";
+import { ExternalLink, HeartHandshake, MoveRight } from "lucide-react";
 
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { LayoutGrid } from "@/components/ui/layout-grid";
@@ -11,9 +11,11 @@ import {
 function CareerJourneyCopy({
   index,
   project,
+  showVideoCallout,
 }: {
   index: number;
   project: CareerJourneyProject;
+  showVideoCallout?: boolean;
 }) {
   return (
     <div className="career-journey-copy">
@@ -67,6 +69,13 @@ function CareerJourneyCopy({
           </div>
         ))}
       </dl>
+
+      {showVideoCallout ? (
+        <aside className="career-video-watch-callout">
+          <p>Click to watch the videos</p>
+          <MoveRight aria-hidden="true" className="career-video-watch-arrow" />
+        </aside>
+      ) : null}
     </div>
   );
 }
@@ -82,7 +91,6 @@ function WhizKidVideo({ item }: { item: CareerJourneyMedia }) {
         aria-label={item.alt}
         className="career-whizkid-video"
         controls
-        muted
         playsInline
         poster={item.thumbnail}
         preload="metadata"
@@ -108,7 +116,6 @@ function CareerVideoGallery({
           <video
             aria-label={video.alt}
             controls
-            muted
             playsInline
             poster={video.poster}
             preload="metadata"
@@ -131,7 +138,7 @@ function CareerFeaturedVideo({
       <video
         aria-label={video.alt}
         controls
-        muted
+        muted={video.muted}
         playsInline
         poster={video.poster}
         preload="metadata"
@@ -200,7 +207,14 @@ export function CareerJourney() {
               </>
             ) : (
               <>
-                <CareerJourneyCopy index={index} project={project} />
+                <CareerJourneyCopy
+                  index={index}
+                  project={project}
+                  showVideoCallout={
+                    (project.media?.filter((item) => item.videoSrc).length ??
+                      0) > 1
+                  }
+                />
                 {project.video || project.media ? (
                   <div className="career-journey-showcase">
                     {project.media ? (
@@ -224,7 +238,7 @@ export function CareerJourney() {
                           aria-label={project.video.alt}
                           className="career-video"
                           controls
-                          muted
+                          muted={project.video.muted}
                           playsInline
                           poster={project.video.poster}
                           preload="metadata"

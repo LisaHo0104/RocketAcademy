@@ -16,6 +16,7 @@ export type LayoutGridCard = {
   id: number;
   imageClassName?: string;
   metric?: string;
+  muted?: boolean;
   thumbnail: string;
   title: string;
   videoSrc?: string;
@@ -76,7 +77,7 @@ export function LayoutGrid({
                 aria-label={card.alt}
                 className="career-layout-card-video-media"
                 controls
-                muted
+                muted={card.muted}
                 playsInline
                 poster={card.thumbnail}
                 preload="metadata"

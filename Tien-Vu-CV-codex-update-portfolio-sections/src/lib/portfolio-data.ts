@@ -33,6 +33,7 @@ export type CareerJourneyMedia = {
   id: number;
   imageClassName?: string;
   metric?: string;
+  muted?: boolean;
   thumbnail: string;
   title: string;
   videoSrc?: string;
@@ -55,6 +56,7 @@ export type CareerJourneyProject = {
   video?: {
     alt: string;
     caption: string;
+    muted?: boolean;
     poster: string;
     src: string;
     title: string;
@@ -419,6 +421,7 @@ export const careerJourneyProjects: CareerJourneyProject[] = [
       src: "/assets/portfolio/swinburne-vietnam-content-creator-silent.mp4",
       poster: "/assets/portfolio/swinburne-vietnam-content-creator-poster.png",
       alt: "Swinburne Vietnam content creator screen recording",
+      muted: true,
     },
     videoGallery: [
       {
@@ -534,6 +537,7 @@ export const careerJourneyProjects: CareerJourneyProject[] = [
         details: "XOCOATI Saigon",
         thumbnail: "/assets/portfolio/xocoati-hidden-workshop.png",
         videoSrc: "/assets/portfolio/xocoati-saigon-screen-recording-silent.mp4",
+        muted: true,
         alt: "XOCOATI Saigon marketing assistant screen recording",
         className: "career-layout-card-video",
       },
@@ -574,6 +578,19 @@ export const careerJourneyProjects: CareerJourneyProject[] = [
         alt: "Personal TikTok channel profile showing Melbourne lifestyle content",
         className: "career-layout-card-wide career-layout-card-full-image",
         imageClassName: "career-layout-card-image-contain",
+      },
+      {
+        id: 2,
+        eyebrow: "Melbourne lifestyle",
+        title: "Melbourne Coffee Date",
+        description:
+          "A short-form lifestyle story featuring a coffee date in Melbourne, edited for TikTok's vertical format.",
+        details: "Personal TikTok · @jcta_tt",
+        thumbnail:
+          "/assets/portfolio/personal-tiktok-melbourne-video-poster.jpg",
+        videoSrc: "/assets/portfolio/personal-tiktok-melbourne-video.mp4",
+        alt: "Melbourne Coffee Date lifestyle video for Personal TikTok",
+        className: "career-layout-card-tiktok-video",
       },
     ],
   },

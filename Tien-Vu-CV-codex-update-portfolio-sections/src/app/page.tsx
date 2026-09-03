@@ -137,7 +137,7 @@ export default function Home() {
             <a
               aria-label="Explore selected work"
               className="lego-hero-cta-link"
-              href="#projects"
+              href="#prepared-video-work"
             />
           </div>
         </section>

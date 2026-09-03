@@ -1732,6 +1732,38 @@
   overflow-wrap: anywhere;
 }
 
+.career-video-watch-callout {
+  display: flex;
+  width: min(100%, 390px);
+  min-height: 150px;
+  margin: clamp(44px, 7vw, 92px) 0 0 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.career-video-watch-callout p {
+  max-width: 300px;
+  margin: 0;
+  color: #2f3329;
+  font-family: var(--font-barlow-condensed), "Arial Narrow", Arial, sans-serif;
+  font-size: clamp(24px, 2.7vw, 40px);
+  font-weight: 800;
+  line-height: 0.95;
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.career-video-watch-arrow {
+  display: block;
+  width: min(62%, 180px);
+  height: auto;
+  margin: 14px 0 0;
+  color: #ed1c2e;
+  stroke-width: 2.25;
+}
+
 .career-journey-media {
   min-width: 0;
 }
@@ -1829,9 +1861,12 @@
 }
 
 .career-journey-project-swinburne-videos {
-  grid-template-columns: minmax(0, 1fr) 196px;
+  grid-template-columns: minmax(0, 760px) 220px;
   column-gap: clamp(24px, 4vw, 48px);
   row-gap: 16px;
+  justify-content: center;
+  width: min(100%, 1028px);
+  margin-inline: auto;
 }
 
 .career-journey-project-swinburne-videos .career-journey-copy {
@@ -1843,7 +1878,7 @@
   grid-column: 1;
   grid-row: 2;
   justify-self: start;
-  width: min(100%, 600px);
+  width: 100%;
   margin: 0;
   gap: 10px;
 }
@@ -1853,7 +1888,7 @@
   grid-row: 1 / span 2;
   align-self: start;
   justify-self: center;
-  width: 196px;
+  width: 220px;
   max-width: 100%;
   margin: 0;
   padding: 9px;
@@ -3042,6 +3077,15 @@
   background: #1c1511;
 }
 
+.career-layout-card-tiktok-video {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: min(46%, 330px);
+  aspect-ratio: 9 / 16;
+  margin: 0;
+  background: #1c1511;
+}
+
 .career-layout-card:first-child {
   grid-column: 1 / -1;
   aspect-ratio: 1674 / 990;
@@ -3240,6 +3284,24 @@
 @media (max-width: 1020px) {
   .career-journey-project {
     grid-template-columns: 1fr;
+  }
+
+  .career-video-watch-callout {
+    margin: 38px auto 18px;
+    align-items: center;
+  }
+
+  .career-video-watch-callout p {
+    text-align: center;
+  }
+
+  .career-video-watch-arrow {
+    margin-right: 0;
+    transform: rotate(90deg);
+  }
+
+  .career-journey-project-swinburne-videos {
+    grid-template-columns: minmax(0, 1fr) 220px;
   }
 
   .career-journey-project-whizkid {
@@ -3506,7 +3568,7 @@
 
   .career-featured-video {
     justify-self: start;
-    width: min(72%, 280px);
+    width: min(78%, 312px);
   }
 
   .career-journey-project-whizkid {
@@ -3742,6 +3804,10 @@
 
   .career-layout-card-video {
     grid-column: 1 / -1;
+  }
+
+  .career-layout-card-tiktok-video {
+    width: min(76%, 320px);
   }
 
   .career-layout-expanded {

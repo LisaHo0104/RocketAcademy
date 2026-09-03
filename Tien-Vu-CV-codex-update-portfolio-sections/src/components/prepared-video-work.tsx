@@ -1,3 +1,5 @@
+import { DecorativeStars } from "@/components/decorative-stars";
+
 import styles from "./prepared-video-work.module.css";
 
 const videos = [
@@ -11,6 +13,11 @@ const videos = [
     poster: "/assets/prepared-video-work/prepared-video-02-poster.jpg",
     src: "/assets/prepared-video-work/prepared-video-02.mp4",
   },
+  {
+    label: "Prepared video work sample 3",
+    poster: "/assets/prepared-video-work/prepared-video-03-poster.jpg",
+    src: "/assets/prepared-video-work/prepared-video-03.mp4",
+  },
 ];
 
 export function PreparedVideoWork() {
@@ -20,6 +27,7 @@ export function PreparedVideoWork() {
       className={styles.section}
       id="prepared-video-work"
     >
+      <DecorativeStars className="decorative-stars-prepared" />
       <div className={styles.inner}>
         <header className={styles.heading}>
           <p className={styles.eyebrow}>Selected vertical content</p>
@@ -50,20 +58,6 @@ export function PreparedVideoWork() {
               </div>
             </div>
           ))}
-
-          <div className={styles.phone}>
-            <div className={styles.screen}>
-              <div className={styles.placeholder}>
-                <div className={styles.placeholderContent}>
-                  <span aria-hidden="true" className={styles.plus}>
-                    +
-                  </span>
-                  <strong>Coming soon</strong>
-                  <small>New video slot</small>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { DecorativeStars } from "@/components/decorative-stars";
 import { Timeline, type TimelineEntry } from "@/components/ui/timeline";
 import {
   academicEntries,
@@ -60,6 +61,7 @@ export function AcademicJourney() {
       className="academic-section"
       id="academic"
     >
+      <DecorativeStars className="decorative-stars-academic" />
       <Timeline
         className="academic-timeline"
         data={timelineData}

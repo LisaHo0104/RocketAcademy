@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { ArrowUpRight, Mail, Phone } from "lucide-react";
 
+import { DecorativeStars } from "@/components/decorative-stars";
+import { LegoSticker } from "@/components/lego-sticker-parade";
+
 export function ContactSection() {
   return (
     <section
@@ -8,6 +11,8 @@ export function ContactSection() {
       className="contact-section"
       id="contact"
     >
+      <DecorativeStars className="decorative-stars-contact" />
+      <LegoSticker className="lego-sticker-placement-contact" variant="idea" />
       <div aria-hidden="true" className="contact-floating-brick contact-floating-brick-red" />
       <div aria-hidden="true" className="contact-floating-brick contact-floating-brick-blue" />
 

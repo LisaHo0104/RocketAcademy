@@ -4,7 +4,9 @@ import { AcademicJourney } from "@/components/academic-journey";
 import { AcademicProjects } from "@/components/academic-projects";
 import { CareerJourney } from "@/components/career-journey";
 import { ContactSection } from "@/components/contact-section";
+import { DecorativeStars } from "@/components/decorative-stars";
 import { IntroGate } from "@/components/intro-gate";
+import { LegoSticker } from "@/components/lego-sticker-parade";
 import { PreparedVideoWork } from "@/components/prepared-video-work";
 import { CometCard } from "@/components/ui/comet-card";
 
@@ -143,6 +145,8 @@ export default function Home() {
         </section>
 
         <section className="about-section" id="about-me" aria-labelledby="about-heading">
+          <DecorativeStars className="decorative-stars-about" />
+          <LegoSticker className="lego-sticker-placement-about" variant="camera" />
           <div className="about-inner">
             <div className="about-copy">
               <p className="about-kicker">About Me</p>
@@ -204,6 +208,7 @@ export default function Home() {
         <AcademicProjects />
 
         <section className="values-section" aria-label="Creative values">
+          <DecorativeStars className="decorative-stars-values" />
           <div className="values-cloud">
             <p className="values-quote">
               “Creating with

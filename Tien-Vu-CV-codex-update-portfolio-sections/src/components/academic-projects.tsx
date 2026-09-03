@@ -1,3 +1,4 @@
+import { DecorativeStars } from "@/components/decorative-stars";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { academicProjects } from "@/lib/portfolio-data";
 
@@ -8,6 +9,7 @@ export function AcademicProjects() {
       className="academic-projects-section"
       id="projects"
     >
+      <DecorativeStars className="decorative-stars-academic-projects" />
       <div className="academic-projects-inner">
         <div className="academic-projects-heading">
           <p>Academic Projects</p>

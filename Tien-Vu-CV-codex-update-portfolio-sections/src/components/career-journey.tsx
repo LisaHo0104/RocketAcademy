@@ -2,6 +2,8 @@ import { ExternalLink, HeartHandshake, MoveRight } from "lucide-react";
 
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { LayoutGrid } from "@/components/ui/layout-grid";
+import { DecorativeStars } from "@/components/decorative-stars";
+import { LegoSticker } from "@/components/lego-sticker-parade";
 import {
   careerJourneyProjects,
   type CareerJourneyMedia,
@@ -159,6 +161,8 @@ export function CareerJourney() {
       className="career-journey-section"
       id="career-journey"
     >
+      <DecorativeStars className="decorative-stars-career" />
+      <LegoSticker className="lego-sticker-placement-career" variant="clapper" />
       <div className="career-journey-inner">
         <div className="career-journey-heading">
           <p>My Career Journey</p>

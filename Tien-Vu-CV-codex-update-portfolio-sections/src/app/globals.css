@@ -1141,6 +1141,123 @@
   }
 }
 
+/* Small toy-brick mascots, scattered safely inside separate sections. */
+.lego-sticker {
+  position: relative;
+  display: grid;
+  width: clamp(112px, 12vw, 168px);
+  aspect-ratio: 1;
+  place-items: center;
+  isolation: isolate;
+  animation: lego-sticker-float 5s ease-in-out infinite;
+}
+
+.lego-sticker-ornament {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.lego-sticker::before {
+  position: absolute;
+  inset: 16%;
+  z-index: -1;
+  content: "";
+  background: rgba(255, 253, 247, 0.92);
+  border: 3px solid var(--lego-ink);
+  border-radius: 44% 56% 48% 52% / 52% 45% 55% 48%;
+  box-shadow:
+    7px 9px 0 var(--sticker-shadow, var(--lego-yellow)),
+    0 18px 30px rgba(23, 32, 51, 0.16);
+  transform: rotate(var(--sticker-backdrop-rotate, -4deg));
+}
+
+.lego-sticker-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 7px rgba(23, 32, 51, 0.22));
+}
+
+.lego-sticker-camera {
+  --sticker-shadow: var(--lego-blue);
+  --sticker-backdrop-rotate: -7deg;
+  transform: rotate(-7deg);
+}
+
+.lego-sticker-clapper {
+  --sticker-shadow: var(--lego-yellow);
+  --sticker-backdrop-rotate: 4deg;
+  width: clamp(122px, 13vw, 182px);
+  animation-delay: -1.7s;
+}
+
+.lego-sticker-idea {
+  --sticker-shadow: var(--lego-red);
+  --sticker-backdrop-rotate: 7deg;
+  transform: rotate(6deg);
+  animation-delay: -3.2s;
+}
+
+.lego-sticker-placement-about {
+  right: clamp(18px, 3vw, 48px);
+  bottom: clamp(22px, 3vw, 42px);
+}
+
+.lego-sticker-placement-career {
+  top: clamp(70px, 7vw, 104px);
+  right: clamp(18px, 3vw, 48px);
+}
+
+.lego-sticker-placement-contact {
+  right: clamp(18px, 3vw, 48px);
+  bottom: clamp(70px, 7vw, 108px);
+}
+
+@keyframes lego-sticker-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -9px;
+  }
+}
+
+@media (max-width: 640px) {
+  .lego-sticker-ornament,
+  .lego-sticker-clapper {
+    width: 92px;
+  }
+
+  .lego-sticker::before {
+    border-width: 2px;
+    box-shadow: 4px 5px 0 var(--sticker-shadow, var(--lego-yellow));
+  }
+
+  .lego-sticker-placement-about {
+    right: 14px;
+    bottom: 18px;
+  }
+
+  .lego-sticker-placement-career {
+    top: 54px;
+    right: 12px;
+  }
+
+  .lego-sticker-placement-contact {
+    right: 14px;
+    bottom: 82px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lego-sticker {
+    animation: none;
+  }
+}
+
 .academic-section {
   position: relative;
   overflow: hidden;
@@ -5438,6 +5555,176 @@ select {
   background-image:
     linear-gradient(rgba(0, 79, 158, 0.055) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 79, 158, 0.045) 1px, transparent 1px);
+}
+
+/* Soft, rounded stars inspired by the handmade reference sticker. */
+.decorative-stars {
+  position: absolute;
+  z-index: 1;
+  width: clamp(112px, 11vw, 190px);
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+
+.decorative-star {
+  position: absolute;
+  display: block;
+  color: #ffd45c;
+  filter: drop-shadow(0 5px 0 rgba(181, 22, 27, 0.16));
+  animation: decorative-star-drift 5.4s ease-in-out infinite;
+}
+
+.decorative-star::after {
+  position: absolute;
+  inset: 15%;
+  content: "";
+  opacity: 0.26;
+  background-image:
+    radial-gradient(circle at 24% 30%, rgba(255, 255, 255, 0.9) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 72% 62%, rgba(216, 154, 35, 0.55) 0 1px, transparent 1.7px);
+  background-size: 9px 9px, 11px 11px;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 38%, 69% 59%, 79% 96%, 50% 74%, 21% 96%, 31% 59%, 2% 38%, 39% 35%);
+}
+
+.decorative-star svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.decorative-star-1 {
+  top: 2%;
+  right: 0;
+  width: 58%;
+  transform: rotate(9deg);
+}
+
+.decorative-star-2 {
+  bottom: 2%;
+  left: 0;
+  width: 36%;
+  color: #ffdf7b;
+  transform: rotate(-14deg);
+  animation-delay: -1.8s;
+}
+
+.decorative-star-3 {
+  right: 5%;
+  bottom: 5%;
+  width: 25%;
+  color: #ffc928;
+  transform: rotate(18deg);
+  animation-delay: -3.4s;
+}
+
+.decorative-stars-about {
+  top: clamp(74px, 10vw, 138px);
+  right: clamp(8px, 2.5vw, 46px);
+  opacity: 0.78;
+  transform: rotate(4deg);
+}
+
+.decorative-stars-values {
+  right: clamp(12px, 4vw, 72px);
+  bottom: clamp(32px, 7vw, 116px);
+  z-index: 3;
+  opacity: 0.92;
+}
+
+.decorative-stars-contact {
+  top: clamp(76px, 8vw, 126px);
+  left: 50%;
+  opacity: 0.9;
+  transform: translateX(-50%) rotate(-7deg);
+}
+
+.decorative-stars-prepared {
+  top: clamp(88px, 8vw, 122px);
+  left: clamp(12px, 4vw, 72px);
+  opacity: 0.76;
+  transform: rotate(-9deg);
+}
+
+.decorative-stars-career {
+  top: 23%;
+  left: clamp(-32px, 1vw, 18px);
+  opacity: 0.62;
+  transform: rotate(11deg) scale(0.88);
+}
+
+.decorative-stars-academic {
+  top: clamp(92px, 7vw, 132px);
+  right: clamp(12px, 4vw, 70px);
+  opacity: 0.72;
+  transform: rotate(6deg);
+}
+
+.decorative-stars-academic-projects {
+  bottom: clamp(30px, 5vw, 76px);
+  left: clamp(12px, 3vw, 54px);
+  z-index: 2;
+  opacity: 0.88;
+  transform: rotate(-6deg);
+}
+
+@keyframes decorative-star-drift {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+@media (max-width: 760px) {
+  .decorative-stars {
+    width: 98px;
+  }
+
+  .decorative-stars-about {
+    display: none;
+  }
+
+  .decorative-stars-values {
+    right: -16px;
+    bottom: 44px;
+    opacity: 0.72;
+  }
+
+  .decorative-stars-contact {
+    top: 62px;
+    right: -20px;
+    left: auto;
+    opacity: 0.65;
+    transform: rotate(-7deg);
+  }
+
+  .decorative-stars-prepared {
+    top: auto;
+    right: -18px;
+    bottom: 34px;
+    left: auto;
+    opacity: 0.62;
+  }
+
+  .decorative-stars-career,
+  .decorative-stars-academic {
+    display: none;
+  }
+
+  .decorative-stars-academic-projects {
+    bottom: 28px;
+    left: -18px;
+    opacity: 0.68;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decorative-star {
+    animation: none;
+  }
 }
 
 .about-section,
